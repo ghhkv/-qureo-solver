@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUREO Auto Solver - لوحة التحكم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- رأس الصفحة -->
+        <header class="header">
+            <h1>QUREO Auto Solver</h1>
+            <p>منصة التشغيل والحل التلقائي - المنهج الحكومي</p>
+        </header>
+
+        <!-- قسم تسجيل الدخول والبيانات -->
+        <section class="card">
+            <h2>بيانات الاتصال بمنصة Qureo</h2>
+            <form id="qureoForm">
+                <div class="input-group">
+                    <label for="portalUrl">رابط المنصة:</label>
+                    <input type="url" id="portalUrl" value="https://me-portal.qureo.education/login" readonly>
+                </div>
+
+                <div class="input-group">
+                    <label for="username">اسم المستخدم / البريد:</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم أو الكود الخاص بك" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">كلمة المرور:</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                </div>
+
+                <button type="submit" class="btn-primary">⚡ ابدأ الحل التلقائي</button>
+            </form>
+        </section>
+
+        <!-- قسم التقدم المباشر والنشاط -->
+        <section class="card">
+            <h2>التقدم المباشر والنشاط</h2>
+            <div class="status-box">
+                <div class="status-item">
+                    <span>حالة النظام:</span>
+                    <span id="systemStatus" class="badge idle">في الانتظار</span>
+                </div>
+                <div class="status-item">
+                    <span>الفصول المكتملة:</span>
+                    <span id="completedChapters">0 / 42</span>
+                </div>
+            </div>
+            
+            <div class="terminal-log" id="terminalLog">
+                [النظام] جاهز للاتصال وبدء العمليات...
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
