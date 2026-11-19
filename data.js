@@ -1,34 +1,467 @@
-// Solution data is added here after the Qureo and financial-culture source files are provided.
-window.SOLUTIONS_DB = window.SOLUTIONS_DB || { qureo: [], finance: [] };
-
-// Keep the original portfolio page and its effects intact while applying the requested branding.
-(function applyPortfolioBranding() {
-  const updateFrame = () => {
-    const frame = document.querySelector('iframe[title="واجهة نيون إبداعية"]');
-    if (!frame) return;
-
-    const apply = () => {
-      try {
-        const doc = frame.contentDocument;
-        if (!doc) return;
-        doc.querySelectorAll('span').forEach(span => {
-          if (span.textContent.trim() === 'أحمد') span.textContent = 'العالمي';
-        });
-        doc.querySelectorAll('.text-emerald-400').forEach(value => {
-          if (value.textContent.includes('Ahmed Dev')) value.textContent = value.textContent.replace('Ahmed Dev', 'العالمي ديف');
-        });
-      } catch (error) {
-        // The iframe is expected to be same-origin; ignore transient load timing issues.
-      }
-    };
-
-    frame.addEventListener('load', apply);
-    apply();
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateFrame, { once: true });
-  } else {
-    updateFrame();
-  }
-})();
+window.SOLUTIONS_DB = {
+  "qureo": [
+    {
+      "level": 1,
+      "title": "المستوى الأول — JavaScript",
+      "content": "المستوى الأول — JavaScript",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(\"Hello\");\nconsole.log(\"Good morning\");\nconsole.log(\"Good evening\");\nconsole.log(\"Good night\");\nconsole.log(\"Good luck\");\nconsole.log(\"Hello\");\nconsole.log(\"Eggs\");\nconsole.log(\"Milk\");\nconsole.log(\"Lion\");\nconsole.log(\"Elephant\");\nconsole.log(\"Giraffe\");\nconsole.log(\"Programming\");\nconsole.log(\"Hello.\");\nconsole.log(\"My name is\");\nconsole.log(\"Cody.\");"
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "المستوى الثاني — العمليات الحسابية",
+      "content": "المستوى الثاني — العمليات الحسابية",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(\"Let's calculate.\");\nconsole.log(\"1+1\");\nconsole.log(1+1);\nconsole.log(1400+3600);\nconsole.log(432+345);\nconsole.log(100-50);\nconsole.log(5*6);\nconsole.log(10/5);\nconsole.log(10000000000*10000000000);\nconsole.log(\"Set of 2 coffees \" + (250 * 2) + \" codycoins\");\nconsole.log(\"Set of 3 coffees \" + (250 * 3) + \" codycoins\");\nconsole.log(\"One muffin \" + (320 * 1) + \" codycoins\");\nconsole.log(\"Two muffins \" + (320 * 2) + \" codycoins\");\nconsole.log(50 + 100);\nconsole.log(19+40);\nconsole.log(7-2);\nconsole.log(15/5);\nconsole.log(\"Today is the 17th. 7 days ago was the \" + (17 - 7) + \"th.\");\nconsole.log(\"The answer is \" + (2*5) + \".\");"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "المستوى الثالث — المتغيرات",
+      "content": "المستوى الثالث — المتغيرات",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let fish;\nfish = 0;\nfish = fish + 3;\nfish = fish + 7;\nconsole.log(fish);\nlet fish;\nfish = 0;\nfish = fish + 3;\nfish = fish + 7;\nconsole.log(\"fish\");\nlet fish;\nfish = 0;\nfish = fish + 8;\nfish = fish + 12;\nconsole.log(fish);\nlet apple;\napple = 0;\napple = apple + 5;\napple = apple + 8;\nconsole.log(apple);\nlet allowance;\nallowance = 700;\nallowance = allowance + 1500;\nconsole.log(allowance);\nlet score;\nconsole.log(score);\nlet number;\nnumber = 10;\nconsole.log(number);\nlet number;\nnumber = 3;\nnumber = number + 10;\nconsole.log(number);"
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "المستوى الرابع — مراجعة الأساسيات",
+      "content": "المستوى الرابع — مراجعة الأساسيات",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(\"Good evening\");\nconsole.log(\"Bread and coffee for \" + (200 + 150) + \" codycoins\");\nlet num;\nnum = 2;\nnum = num + 8;\nconsole.log(num);\nconsole.log(\"Hello\");\nconsole.log(\"Make the first line a comment.\");\nconsole.log(5 + 7);\nconsole.log(\"The answer is \" + (3 * 5) + \".\");\nlet number;\nlet num;\nnum = 5;\nconsole.log(num);"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "title": "المستوى الخامس — الشروط",
+      "content": "المستوى الخامس — الشروط",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let fish;\nfish = 0;\nconsole.log(fish);\nlet fish = 0;\nconsole.log(fish);\nlet apple = 0;\napple = apple + 10;\nconsole.log(apple);\nlet science = 100;\nif (science == 100) {\nconsole.log(\"Increased allowance!\");\n}\nlet math = 100;\nif (math == 100) {\nconsole.log(\"Get a reward\");\n}\nlet num = 5;\nconsole.log(num);\nlet num = 100;\nif (num == 100) {\nconsole.log(\"Correct\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "title": "المستوى السادس — if / else",
+      "content": "المستوى السادس — if / else",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let science = 100;\nif (science == 100) {\nconsole.log(\"Increased allowance!\");\n}\nlet science = 80;\nif (science == 100) {\nconsole.log(\"Increased allowance!\");\n} else {\nconsole.log(\"Weeding the garden\");\n}\nlet math = 80;\nif (math == 100) {\nconsole.log(\"Get reward\");\n} else {\nconsole.log(\"No reward\");\n}\nlet egg = 10;\nif (egg == 0) {\nconsole.log(\"Let's go buy some.\");\n} else {\nconsole.log(\"I still have some.\");\n}\nlet num = 777;\nif (num == 777) {\nconsole.log(\"lucky\");\n} else {\nconsole.log(\"better luck next time\");\n}\nlet math = 30;\nif (math <= 50) {\nconsole.log(\"Add homework\");\n} else {\nconsole.log(\"No homework!\");\n}\nlet word = 60;\nif (word >= 70) {\nconsole.log(\"pass\");\n} else {\nconsole.log(\"fail\");\n}\nlet height = 91;\nif (height > 130) {\nconsole.log(\"Can ride\");\n} else {\nconsole.log(\"Cannot ride\");\n}\nlet age = 15;\nif (age <= 16) {\nconsole.log(\"No entry\");\n} else {\nconsole.log(\"Entry allowed\");\n}\nlet score = 80;\nif (score >= 60) {\nconsole.log(\"Pass\");\n} else {\nconsole.log(\"Fail\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "title": "المستوى السابع — else if",
+      "content": "المستوى السابع — else if",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let num = 2;\nif (num == 1) {\nconsole.log(\"New bicycle\");\n} else if (num == 2) {\nconsole.log(\"Pair of tickets to the aquarium\");\n}\nlet num = 3;\nif (num == 1) {\nconsole.log(\"New bicycle\");\n} else if (num == 2) {\nconsole.log(\"Pair of tickets to the aquarium\");\n} else if (num == 3) {\nconsole.log(\"10 bags of potato chips\");\n}\nlet num = 4;\nif (num == 1) {\nconsole.log(\"New bicycle\");\n} else if (num == 2) {\nconsole.log(\"Pair of tickets to the aquarium\");\n} else if (num == 3) {\nconsole.log(\"10 bags of potato chips\");\n} else if (num == 4) {\nconsole.log(\"Illustrated book of sea creatures\");\n}\nlet num = 10;\nif (num == 1) {\nconsole.log(\"New bicycle\");\n} else {\nconsole.log(\"Stickers\");\n}\nlet people = 3;\nif (people == 2) {\nconsole.log(\"10% off\");\n} else if (people >= 3) {\nconsole.log(\"20% off\");\n} else {\nconsole.log(\"retail price\");\n}\nlet egg = 2;\nif (egg == 0) {\nconsole.log(\"I have to go buy more eggs\");\n} else if (egg <= 3) {\nconsole.log(\"I'm almost out of eggs\");\n} else {\nconsole.log(\"I still have eggs\");\n}\nlet score = 62;\nif (score == 100) {\nconsole.log(\"Perfect score\");\n} else if (score >= 80) {\nconsole.log(\"So close\");\n} else if (score >= 60) {\nconsole.log(\"Pass\");\n}\nlet egg = 5;\nif (egg == 0) {\nconsole.log(\"No stock\");\n} else if (egg <= 3) {\nconsole.log(\"Low stock\");\n} else {\nconsole.log(\"In stock\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "title": "المستوى الثامن — مراجعة الشروط",
+      "content": "المستوى الثامن — مراجعة الشروط",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let science = 100;\nif (science == 100) {\nconsole.log(\"The reward is a cake\");\n}\nlet science = 80;\nif (science == 100) {\nconsole.log(\"The reward is a cake\");\n} else {\nconsole.log(\"No reward\");\n}\nlet test = 30;\nif (test <= 50) {\nconsole.log(\"Homework\");\n} else {\nconsole.log(\"No homework\");\n}\nlet test = 77;\nif (test == 100) {\nconsole.log(\"Perfect score\");\n} else if (test >= 75) {\nconsole.log(\"Pass\");\n} else {\nconsole.log(\"Make-up exam\");\n}\nlet num = 7;\nif (num == 7) {\nconsole.log(\"Correct\");\n}\nlet score = 70;\nif (score >= 60) {\nconsole.log(\"Pass\");\n} else {\nconsole.log(\"Fail\");\n}\nlet num = 100;\nif (num == 100) {\nconsole.log(\"correct\");\n} else {\nconsole.log(\"miss\");\n}\nlet num = 4;\nif (num <= 3) {\nconsole.log(\"A\");\n} else if (num >= 6) {\nconsole.log(\"B\");\n} else {\nconsole.log(\"C\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 9,
+      "title": "المستوى التاسع — AND / OR",
+      "content": "المستوى التاسع — AND / OR",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let numberOfPeople = 3;\nlet fee = 3500;\nif (numberOfPeople >= 2 && fee >= 3000) {\nconsole.log(\"20% off\");\n}\nlet numberOfPeople = 2;\nlet fee = 3500;\nif (numberOfPeople >= 2 && fee >= 3000) {\nconsole.log(\"Free mug\");\n}\nlet age = 15;\nif (age <= 12 || age >= 65) {\nconsole.log(\"30% off\");\n}\nlet a = 5;\nlet b = 10;\nif (a == 5 || b == 10) {\nconsole.log(\"Condition met\");\n}\nlet a = 4;\nlet b = 3;\nif (a >= 2 && b >= 3) {\nconsole.log(\"Condition met\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 10,
+      "title": "المستوى العاشر — الحلقات التكرارية for",
+      "content": "المستوى العاشر — الحلقات التكرارية for",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let numberOfPeople = 2;\nlet fee = 3500;\nif (numberOfPeople >= 2 && fee >= 3000) {\nconsole.log(\"Free mug\");\n} else if (numberOfPeople >= 2 || fee >= 3000) {\nconsole.log(\"Complimentary cookie\");\n}\nfor (let count = 0; count < 10; count = count + 1) {\nconsole.log(\"silk\");\n}\nfor (let count = 0; count < 10; count = count + 1) {\nconsole.log(\"deer\");\n}\nfor (let count = 0; count < 10; count = count + 1) {\nconsole.log(\"campus\");\n}\nfor (let count = 0; count < 10; count++) {\nconsole.log(\"campus\");\n}\nfor (let i = 0; i < 10; i++) {\nconsole.log(\"genius\");\n}\nfor (let i = 0; i < 3; i++) {\nconsole.log(\"Red lorry, yellow lorry\");\n}\nfor (let i = 1; i < 3; i++) {\nconsole.log(\"Red lorry, yellow lorry\");\n}\nfor (let i = 0; i < 100; i++) {\nconsole.log(\"Red lorry, yellow lorry\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"Hello\");\n}\nfor (let i = 0; i < 7; i++) {\nconsole.log(\"Hello\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 11,
+      "title": "المستوى 11",
+      "content": "المستوى 11",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let age = 15;\nlet numberOfPeople = 7;\nif (age <= 18 && numberOfPeople >= 5) {\nconsole.log(\"Student group discount\");\n}\nlet age = 15;\nif (age <= 15 || age >= 70) {\nconsole.log(\"Discounts available\");\n}\nfor (let i = 0; i < 10; i++) {\nconsole.log(\"Good morning\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"Go for it\");\n}\nlet num = 9;\nif (num <= 3 || num >= 7) {console.log(\"A\");}\nelse{console.log(\"B\");}\nfor (let i = 0; i < 2; i++) {\nconsole.log(\"Hello\");\n};\nlet a = 4;\nlet b = 3;\nif (a >= 2 && b >= 3) {\nconsole.log(\"Condition met\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 12,
+      "title": "المستوى 12",
+      "content": "المستوى 12",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(Math.round(9.8));\nconsole.log(Math.round(10.3));\nconsole.log(Math.round(9.2));\nconsole.log(Math.round(10.6));\nconsole.log(Math.round(9.7));\nconsole.log(Math.max(5,10,50));\nconsole.log(Math.min(5,10,50));\nfunction split3(total) {\nlet result = total / 3;\nreturn result;\n}\nconsole.log(split3(2800));\nfunction split5(total) {\nlet result = total / 5;\nreturn result;\n}\nconsole.log(split5(12500));\nfunction calc5(num) {\nlet result = num * 5;\nreturn result;\n}\nconsole.log(calc5(10));\nfunction calc(num) {\nlet result = num * 3;\nreturn result;\n}\nconsole.log(calc(5));\nlet a = 4;\nlet b = 3;\nif (a >= 2 && b >= 3) {\nconsole.log(\"Condition met\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 13,
+      "title": "المستوى 13",
+      "content": "المستوى 13",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(Math.round(10.4));\nconsole.log(Math.max(5,50));\nconsole.log(Math.min(5,50));\nfunction sum(num1, num2) {\nlet result = num1 + num2;\nreturn result;\n}\nconsole.log(sum(10, 20));\nconsole.log(Math.round(10.5));\nconsole.log(Math.floor(10.5));\nconsole.log(Math.floor(7.8));\nconsole.log(Math.random());\nif (Math.random() >= 0.5) { console.log(\"Lucky today\");} else { console.log(\"Unlucky today\");\nconsole.log(Math.random());\nconsole.log(Math.random() * 10);\nconsole.log(Math.floor(Math.random() * 10));\nconsole.log(Math.round(5.5));\nconsole.log(Math.floor(8.8));\nif ( Math.random() >= 0.5) {\nconsole.log(\"Excellent luck\");\n} else {\nconsole.log(\"Bad luck\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 14,
+      "title": "المستوى 14",
+      "content": "المستوى 14",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(Math.round(5.7));\nconsole.log(Math.round(5.5));\nconsole.log(Math.floor(5.5));\nconsole.log(Math.max(10,20));\nconsole.log(Math.min(10,20));\nconsole.log(Math.random());\nfunction split4(total) {\nlet result = total / 4;\nreturn result;\n}\nconsole.log(split4(1200));\nconsole.log(Math.max(10,50,100));\nconsole.log(Math.floor(12.8));\nconsole.log(Math.floor(Math.random() * 10 ));\nfunction sum(num) {\nprocessing\n}\nfunction calc(num) {\nlet result = num * 7;\nreturn result\n}\nconsole.log(calc(10));\nfunction calc(num) {\nlet result = num * 5;\nreturn result;\n}\nconsole.log(calc(7));"
+        }
+      ]
+    },
+    {
+      "level": 15,
+      "title": "المستوى 15",
+      "content": "المستوى 15",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let fee = 1000;\nif (fee == 1000) {\nconsole.log(\"50 codycoins off\");\n}\nlet fee = \"1000 codycoins\";\nif (fee == \"1000 codycoins\") {\nconsole.log(\"50 codycoins off\");\n}\nconsole.log(typeof 500);\nconsole.log(typeof \"500 codycoins\");\nconsole.log(typeof \"100\");\nconsole.log(1 === 1);\nconsole.log(100 == \"100\");\nconsole.log(100 === 500);\nconsole.log(\"Good morning\" === \"Good morning\");\nconsole.log(\"Good morning\" === \"Good night\");\nconsole.log(Number(\"10\"));\nconsole.log(String(500));\nconsole.log(typeof \"1\");\nconsole.log(Number(\"Hello\"));\nconsole.log(typeof\"7\");"
+        }
+      ]
+    },
+    {
+      "level": 16,
+      "title": "المستوى 16",
+      "content": "المستوى 16",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let tempList = [36, 36, 26, 27, 28, 33, 36];\nconsole.log(tempList[2]);\nconsole.log(tempList[5]);\nconsole.log(tempList);\nlet total = 0;\nfor(let i = 0; i < 7; i++){\ntotal = total + tempList[i];\n}\nconsole.log(total);\nconsole.log(total / 7);\nlet runLogs = [5, 2, 4, 1, 3, 3];\nlet total = 0;\nfor (let i = 0; i < 6; i++) {\ntotal = total + runLogs[i];\n}\nconsole.log(total);\nconsole.log(total / 6);\nlet steps = [16000, 12000, 14605, 9920, 13805, 14500];\nlet total = 0;\nfor (let i = 0; i < 6; i++) {\ntotal = total + steps[i];\n}\nconsole.log(total / 6);\nlet tempList = [36, 36, 26, 27, 28, 33, 36, 30, 28, 29];\nconsole.log(tempList.length);\nlet tempList = [36, 36, 26, 27, 28, 33, 36, 30, 28, 29, 26, 30, 31, 28];\nconsole.log(tempList.length);\nlet num = [5,10,15 ];\nlet num = [5, 10, 15, 20, 25];\nconsole.log(num[2]);\nconsole.log(num);\nlet num = [1, 2, 3];\nlet sum = 0;\nfor (let i = 0; i < 3; i++) {\nsum = sum + num[i];\n}\nconsole.log(sum);\nlet num = [5, 10, 15, 20, 25];\nconsole.log(num.length);"
+        }
+      ]
+    },
+    {
+      "level": 17,
+      "title": "المستوى 17",
+      "content": "المستوى 17",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "console.log(typeof 500);\nconsole.log(typeof \"500codycoins\");\nconsole.log(1 === \"1\");\nconsole.log(Number(\"5\"));\nconsole.log(String(10));\nlet tempList = [10, 15, 13, 16, 14, 12, 17];\nconsole.log(tempList[2]);\nlet tempList = [5, 8, 7, 10, 6, 9];\nlet total = 0;\nfor (let i = 0; i < 6; i++) {\ntotal = total + tempList[i];\n}\nconsole.log(total / 6);\nlet tempList = [5, 8, 7, 10, 6, 9, 10, 7, 6, 11, 13, 8, 8, 7];\nconsole.log(tempList.length);\nconsole.log(typeof \"50\");\nconsole.log(typeof 100);\nlet num = [10, 50, 100, 150 ];\nlet num = [5, 10, 15, 20, 25];\nconsole.log(num[3]);\nlet num = [2, 4, 6, 8, 10];\nconsole.log(num);\nlet num = [2, 4, 6];\nlet sum = 0;\nfor (let i = 0; i < 3; i++) {\nsum = sum + num[i];\n}\nconsole.log(sum);\nlet num = [2, 4, 6, 8, 10];\nconsole.log(num.length);"
+        }
+      ]
+    },
+    {
+      "level": 18,
+      "title": "المستوى 18",
+      "content": "المستوى 18",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "<h1>Cody's Notepad</h1>\n<h3>Cody's Notepad</h3>\n<h6>Today's shopping list</h6>\n<h1>Cody's Notepad</h1>\n<h2>Today's shopping list</h2>\n<p>Bread</p>\n<h1>Cody's Notepad</h1>\n<h2>Today's shopping list</h2>\n<p>Bread<br>\nHam<br>\nCheese</p>\n<h1>Rick's Notebook</h1>\n<h2>Shopping List</h2>\n<p>Tomato<br>\nOnion<br>\nMushroom<br>\nGarlic</p>\n<h1>Shopping List</h1>\n<ul>\n<li>Tomato</li>\n<li>Onion</li>\n<li>Mushroom</li>\n<li>Garlic</li>\n</ul>\n<h1>Tomorrow's Schedule</h1>\n<ol>\n<li>Science</li>\n<li>Math</li>\n<li>Music</li>\n<li>History</li>\n<li>Physical Education</li>\n</ol>\n<h1>Cooking Wishlist</h1>\n<ul>\n<li>Curry rice<br><img src=\"curry.png\"></li>\n<li>Japanese rice omelette<br><img src=\"omelette.png\"></li>\n<li>Pasta<br><img src=\"pasta.png\"></li>\n</ul>\nalt=\"Rice with spicy sauce\"\nalt=\"Japanese rice omelette with ketchup\""
+        }
+      ]
+    },
+    {
+      "level": 19,
+      "title": "المستوى 19",
+      "content": "المستوى 19",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "h1{\ncolor: red;\n}\nh1{\ncolor: blue;\n}\nh1{\ncolor: blue;\n}\np{\ncolor: red;\n}\nh1{\ncolor: blue;\nbackground-color: yellow;\n}\np{\ncolor: red;\n}\nh1{\ncolor: red;\nbackground-color: yellow;\n}\np{\ncolor: blue;\nbackground-color: orange;\n}\np {\nfont-weight: bold;\n}\np {\nfont-weight: normal;\n}\np {\nfont-weight: 900;\n}\np {\nfont-size : 10px;\n}\np {\nfont-size : 50px;\n}\np{\ncolor: blue;\n}\np{\ncolor: green;\n}\n<p class=\"sea\">Let's go to the sea.</p>\n<p class=\"mountains\">Let's go to the mountains.</p>\n.sea{\ncolor: blue;\n}\n.mountains{\ncolor: green;\n}\n<p class=\"apple\">Apple</p>\n<p class=\"watermelon\">Watermelon</p>\n.apple{\ncolor:red;\n}\n.watermelon{\ncolor:green;\n}\n/* Change the color of the text of the h1 tag to red. */\nh1{\ncolor: red;\n}\n<!-- Let's give a class name -->\n<p class=\"apple\">Apple</p>\n<p class=\"watermelon\">Watermelon</p>\nh1{\ncolor: red;\n}\nh1 {\ncolor:blue;\n}\n.dog{\ncolor: blue;\n}\n/* Change the text color to navy. */\np {\ncolor: navy;\n}"
+        }
+      ]
+    },
+    {
+      "level": 20,
+      "title": "المستوى 20",
+      "content": "المستوى 20",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "<h1>Travel Itinerary</h1>\n<h2>Packing List</h2>\n<h1>Travel Itinerary</h1>\n<h2>Packing List</h2>\n<p>Wallet<br>\nHat<br>\nHandkerchief</p>\n<h1>Travel Itinerary</h1>\n<h2>Packing List</h2>\n<ul>\n<li>Wallet</li>\n<li>Hat</li>\n<li>Handkerchief</li>\n</ul>\n<h1>How to Make Tomato Soup</h1>\n<ol>\n<li>Boil water</li>\n<li>Add ingredients</li>\n<li>Adjust the seasoning</li>\n</ol>\n<h1>Cody's Page</h1>\n<p>My name is Cody.</p>\n<img src=\"cody.png\">\n<h1>Cody's Page</h1>\n<p>My name is Cody.</p>\n<img src=\"miss.png\" alt=\"Cody's striking pose\">\nh1{ color: red; }\nh1 {\ncolor: red;\nbackground-color: yellow;\n}\np {\nfont-weight: bold;\n}\n<h1>Greetings of the World</h1>\n<p class=\"japanese\">Konnichiwa</p>\n<p class=\"english\">Hello</p>\n<p class=\"french\">Bonjour</p>\nh1 {\ncolor: red;\nbackground-color: yellow;\n}\np {\nfont-weight: bold;\n}\n.japanese{\ncolor: lime;\n}\n.english{\ncolor: purple;\n}\n.french{\ncolor: navy;\n}\n<p>Good morning</p>\n<img src=\"image.png\">\n<ul><li>strawberry</li><li>cherry</li><li>orange</li></ul>\nh1 {\ncolor:yellow\n}\nh3{\ncolor: red;\n}\n.fish{\ncolor: blue;\n}"
+        }
+      ]
+    },
+    {
+      "level": 21,
+      "title": "المستوى 21",
+      "content": "المستوى 21",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let science = 100;\nif (science == 100) {\nconsole.log(\"Reward: steak\");\n}\nlet science = 80;\nif (science == 100) {\nconsole.log(\"Reward: steak\");\n} else if (science >= 80) {\nconsole.log(\"Reward: ice cream\");\n} else {\nconsole.log(\"No games for 1 week.\");\n}\nlet score = 100;\nif (score >= 80) {\nconsole.log(\"Pass\");\n}\nlet score = 30;\nif (score <= 40) {\nconsole.log(\"Retest\");\n}\nlet numberOfPeople = 3;\nlet total = 3333;\nif (numberOfPeople >= 3 && total == 3333) {\nconsole.log(\"30% discount\");\n}\nlet numberOfPeople = 4;\nlet total = 13500;\nif (numberOfPeople >= 10 || total >= 12000) {\nconsole.log(\"Small Gift Present\");\n}\nlet score = 90;\nif (score >= 80) {\nconsole.log(\"Test Passed\");\n}\nlet score = 90;\nlet rank = 1;\nif (score >= 80) {\nconsole.log(\"Test Passed\");\nif (rank == 1) {\nconsole.log(\"Trophy Acquired\");\n}\n}\nlet rank = 1;\nif (rank == 1) {\nconsole.log(\"Regional Champion\");\n}\nlet rank = 1;\nlet fishCaught = 27;\nif (rank == 1) {\nconsole.log(\"Regional Champion\");\nif (fishCaught >= 30) {\nconsole.log(\"New Tournament Record\");\n}\n}\nlet A = 5;\nlet B = 10;\nif (A > B) {\nconsole.log(\"A is larger\");\n} else if (A < B) {\nconsole.log(\"B is larger\");\n}\nlet science = 100;\nlet math = 100;\nif (science == 100) {\nconsole.log(\"Science is 100 points\");\nif (math == 100) {\nconsole.log(\"Science and Math are 100 points\");\n}\n}"
+        }
+      ]
+    },
+    {
+      "level": 22,
+      "title": "المستوى 22",
+      "content": "المستوى 22",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "for (let i = 0; i < 3; i++) {\nconsole.log(\"She sells seashells by the seashore.\");\n}\nfor (let i = 0; i < 3; i++) {\nconsole.log(\"Six slippery snails slid slowly seaward.\");\n}\nfor (let i = 0; i < 10; i++) {\nconsole.log(\"silk\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"sit-up\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"sit-up\");\nif (i == 2) {\nconsole.log(\"running\");\n}\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"lunch box\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"lunch box\");\nif (i == 1) {\nconsole.log(\"library book\");\n}\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"lunch box\");\nif (i == 3) {\nconsole.log(\"fruit\");\n}\n}\nlet i = 0;\ni += 3;\nconsole.log(i);\nlet num = 0;\nnum += 5;\nconsole.log(num);\nfor (let i = 0; i < 3; i++) {\nconsole.log(\"Programming\");\n}\nfor (let i = 0; i < 7; i++) {\nconsole.log(\"Good morning\");\n}\nfor (let i = 0; i < 5; i++) {\nconsole.log(\"sit-ups\");\nif (i == 4) {\nconsole.log(\"End\");\n}\n}"
+        }
+      ]
+    },
+    {
+      "level": 23,
+      "title": "المستوى 23",
+      "content": "المستوى 23",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "function divide6(total) {\nlet per = total / 6;\nreturn per;\n}\nconsole.log(divide6(72));\nfunction split5(total) {\nlet per = total / 5;\nreturn per;\n}\nconsole.log(split5(6250));\nfunction goodMorning() {\nlet greeting = \"Good morning!\";\nreturn greeting;\n}\nconsole.log(goodMorning());\nfunction sum(num1, num2) {\nlet result = num1 + num2;\nreturn result;\n}\nconsole.log(sum(50, 100));\nfunction divide5(total) {\nlet num = total / 5;\nreturn num;\n}\nconsole.log(divide5(35));\nfunction goodNight() {\nlet greeting = \"Good night!\";\nreturn greeting;\n}\nconsole.log(goodNight());\nfunction mul(num1, num2) {\nlet answer = num1 * num2;\nreturn answer;\n}\nconsole.log(mul(9, 7));"
+        }
+      ]
+    },
+    {
+      "level": 24,
+      "title": "المستوى 24",
+      "content": "المستوى 24",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let score = 82;\nif (score == 100) {\nconsole.log(\"Perfect Score\");\n} else if (score >= 75) {\nconsole.log(\"Pass\");\n} else {\nconsole.log(\"Retest\");\n}\nlet score = 90;\nlet rank = 1;\nif (score >= 80) {\nconsole.log(\"Test Passed\");\nif (rank == 1) {\nconsole.log(\"Trophy Acquired\");\n}\n}\nfor (let i = 0; i < 3; i++) {\nconsole.log(\"Apple\");\nif (i == 1) {\nconsole.log(\"Banana\");\n}\n}\nfunction goodNight() {\nlet greeting = \"Good night!\";\nreturn greeting;\n}\nconsole.log(goodNight());\nfunction calc(num1, num2) {\nlet result = num1 * num2;\nreturn result;\n}\nconsole.log(calc(55, 75));\nlet A = 5;\nlet B = 10;\nif (A > B) {\nconsole.log(\"A is larger\");\n} else if (A < B) {\nconsole.log(\"B is larger\");\n}\nlet science = 100;\nlet math = 100;\nif (science == 100) {\nconsole.log(\"Science is 100 points\");\nif (math == 100) {\nconsole.log(\"Science and Math are 100 points\");\n}\n}\nfor (let i = 0; i < 7; i++) {\nconsole.log(\"Good morning\");\n}\nfunction divide3(num) {\nlet result = num / 3;\nreturn result;\n}\nconsole.log(divide3(12345));\nfunction mul(num1, num2) {\nlet result = num1 * num2;\nreturn result;\n}\nconsole.log(mul(9, 7));"
+        }
+      ]
+    },
+    {
+      "level": 25,
+      "title": "المستوى 25",
+      "content": "المستوى 25",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let num = 1;\nfor (let i = 0; i < 5; i++) {\nnum = num * 2;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 0; i < 4; i++) {\nnum = num * 4;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 1; i <= 4; i++) {\nnum = num * 4;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 1; i <= 5; i++) {\nnum = num * i;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 1; i <= 10; i++) {\nnum = num * i;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 0; i < 5; i++) {\nnum = num * 7;\n}\nconsole.log(num);\nlet num = 0;\nfor (let i = 0; i < 6; i++) {\nnum = num + i;\n}\nconsole.log(num);\nlet num = 5040;\nfor (let i = 1; i <= 5; i++) {\nnum = num / i;\n}\nconsole.log(num);"
+        }
+      ]
+    },
+    {
+      "level": 26,
+      "title": "المستوى 26",
+      "content": "المستوى 26",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let tempList = [36.2, 36.5, 36.3, 36.8, 36.4];\nconsole.log(tempList[2]);\nconsole.log(tempList[3]);\nlet tempList = [36.2, 36.5, 36.3, 36.8, 36.4, 36.9, 37.0];\nlet sum = 0;\nfor (let i = 0; i < 7; i++) {\nsum = sum + tempList[i];\n}\nconsole.log(sum / 7);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nconsole.log(tempList.length);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nlet sum = 0;\nfor (let i = 0; i < 14; i++) {\nsum = sum + tempList[i];\n}\nconsole.log(sum / 14);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nlet sum = 0;\nfor (let i = 0; i < tempList.length; i++) {\nsum = sum + tempList[i];\n}\nconsole.log(sum / tempList.length);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nfor (let i = 0; i < tempList.length; i++) {\nif (tempList[i] >= 37.0) {\nconsole.log(\"Be careful!\");\n}\n}\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nfor (let i = 0; i < tempList.length; i++) {\nif (tempList[i] >= 37.5) {\nconsole.log(\"Avoid going outside!\");\n}\n}\nlet scoreList = [52, 60, 79, 82, 66, 59, 88];\nconsole.log(scoreList[5]);\nconsole.log(scoreList.length);\nfor (let i = 0; i < scoreList.length; i++) {\nif (scoreList[i] >= 80) {\nconsole.log(\"Pass\");\n}\n}"
+        }
+      ]
+    },
+    {
+      "level": 27,
+      "title": "المستوى 27",
+      "content": "المستوى 27",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let num = 1;\nfor (let i = 0; i < 7; i++) {\nnum = num * 7;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 1; i <= 5; i++) {\nnum = num * i;\n}\nconsole.log(num);\nlet num = 1;\nfor (let i = 1; i <= 15; i++) {\nnum = num * i;\n}\nconsole.log(num);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4];\nconsole.log(tempList[4]);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nlet sum = 0;\nfor (let i = 0; i < tempList.length; i++) {\nsum = sum + tempList[i];\n}\nconsole.log(sum / tempList.length);\nlet tempList = [36.0, 36.5, 36.3, 36.8, 36.4, 36.9, 36.6, 37.0, 37.1, 36.9, 36.4, 36.6, 36.7, 36.5];\nfor (let i = 0; i < tempList.length; i++) {\nif (tempList[i] >= 37.0) {\nconsole.log(\"Be careful!\");\n}\n}\nlet num = 1;\nfor (let i = 0; i < 3; i++) {\nnum = num * 9;\n}\nconsole.log(num);\nlet num = 5040;\nfor (let i = 1; i <= 5; i++) {\nnum = num / i;\n}\nconsole.log(num);\nlet scoreList = [52, 90, 70, 83, 63, 72, 89];\nconsole.log(scoreList[4]);\nconsole.log(scoreList.length);\nfor (let i = 0; i < scoreList.length; i++) {\nif (scoreList[i] >= 80) {\nconsole.log(\"Pass\");\n}\n}"
+        }
+      ]
+    },
+    {
+      "level": 28,
+      "title": "المستوى 28",
+      "content": "المستوى 28",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let degreeList = [2, 1, 2, 1, 0, 1, 1];\nconsole.log(degreeList[4]);\nfor (let i = 0; i < 7; i++) {\nconsole.log(degreeList[i]);\n}\nfor (let i = 0; i < degreeList.length; i++) {\nconsole.log(degreeList[i]);\n}\nlet degreeList = [8, 6, 11, 10, 9, 7, 12];\nfor (let degree of degreeList) {\nconsole.log(degree);\n}\nlet numList = [5, 10, 15, 20];\nfor (let num of numList) {\nconsole.log(num);\n}\nlet wordList = [\"apple\", \"banana\", \"orange\"];\nfor (let word of wordList) {\nconsole.log(word);\n}\nlet numList = [2, 4, 6, 8];\nfor (let num of numList) {\nconsole.log(num);\n}\nlet wordList = [\"Good morning\", \"Good night\", \"Hello\"];\nfor (let word of wordList) {\nconsole.log(word);\n}"
+        }
+      ]
+    },
+    {
+      "level": 29,
+      "title": "المستوى 29",
+      "content": "المستوى 29",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let score = 100;\nif (score == 100) {\nconsole.log(\"Reward is steak\");\n}\nlet score = 85;\nif (score == 100) {\nconsole.log(\"Reward is steak\");\n} else if (score >= 80) {\nconsole.log(\"Reward is cake\");\n}\nlet score = 62;\nif (score == 100) {\nconsole.log(\"Reward is steak\");\n} else if (score >= 80) {\nconsole.log(\"Reward is cake\");\n} else {\nconsole.log(\"No games for a week\");\n}\nlet fish = 50;\nif (fish >= 50) {\nconsole.log(\"Big catch!\");\n}\nlet fish = 50;\nlet count = 0;\nif (fish >= 50) {\nconsole.log(\"Big catch!\");\ncount = count + 1;\nconsole.log(\"Big fish counter:\" + count);\n}\nlet fish = 120;\nlet count = 0;\nif (fish >= 100) {\nconsole.log(\"Super big catch!\");\ncount = count + 1;\nconsole.log(\"Super big fish counter:\" + count);\n}\nlet weather = \"sunny\";\nif (weather == \"sunny\") {\nconsole.log(\"Picnic in the park\");\n} else {\nconsole.log(\"Lunch at home\");\n}\nlet weather = \"sunny\";\nlet shop = \"OPEN\";\nif (weather == \"sunny\") {\nif (shop == \"OPEN\") {\nconsole.log(\"Let's buy bread and go for a picnic\");\n}\n} else {\nconsole.log(\"Lunch at home\");\n}\nlet weather = \"sunny\";\nlet shop = \"CLOSED\";\nif (weather == \"sunny\") {\nif (shop == \"OPEN\") {\nconsole.log(\"Let's buy bread and go for a picnic\");\n} else {\nconsole.log(\"Let's buy apple and go for a picnic\");\n}\n} else {\nconsole.log(\"Lunch at home\");\n}\nlet weather = \"sunny\";\nif (weather == \"sunny\") {\nconsole.log(\"Let's go on the field trip\");\n} else {\nconsole.log(\"Field trip canceled\");\n}\nlet weather = \"sunny\";\nlet group = \"Group A\";\nif (weather == \"sunny\") {\nif (group == \"Group A\") {\nconsole.log(\"Destination is the zoo\");\n} else {\nconsole.log(\"Destination is the museum\");\n}\n} else {\nconsole.log(\"Field trip canceled\");\n}\nlet weather = \"sunny\";\nlet group = \"Group B\";\nif (weather == \"sunny\") {\nif (group == \"Group A\") {\nconsole.log(\"Destination is the zoo\");\n} else if (group == \"Group B\") {\nconsole.log(\"Destination is the museum\");\n} else {\nconsole.log(\"Destination is the art museum\");\n}\n} else {\nconsole.log(\"Field trip canceled\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 30,
+      "title": "المستوى 30",
+      "content": "المستوى 30",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let degreeList = [8, 6, 11, 10, 9, 7, 12];\nfor (let degree of degreeList) {\nconsole.log(degree);\n}\nlet wordList = [\"tomato\", \"carrot\", \"onion\"];\nfor (let word of wordList) {\nconsole.log(word);\n}\nlet fish = 50;\nlet big = 0;\nif (fish >= 50) {\nconsole.log(\"Big catch!！\");\nbig = big + 1;\nconsole.log(\"Big fish counter:\" + big);\n}\nlet weather = \"sunny\";\nlet shop = \"OPEN\";\nif (weather == \"sunny\") {\nif (shop == \"OPEN\") {\nconsole.log(\"Buy bread and have a picnic\");\n}\n} else {\nconsole.log(\"Lunch at home\");\n}\nlet weather = \"sunny\";\nlet group = \"Group B\";\nif (weather == \"sunny\") {\nif (group == \"Group A\") {\nconsole.log(\"Destination is the zoo\");\n} else if (group == \"Group B\") {\nconsole.log(\"Destination is the museum\");\n} else {\nconsole.log(\"Destination is the art museum\");\n}\n} else {\nconsole.log(\"Field trip canceled\");\n}\nlet numList = [2, 4, 6, 8];\nfor (let num of numList) {\nconsole.log(num);\n}\nlet wordList = [\"Good morning\", \"Good night\", \"Hello\"];\nfor (let word of wordList) {\nconsole.log(word);\n}\nlet weather = \"rain\";\nlet time = \"morning\";\nif (weather == \"rain\") {\nif (time == \"morning\") {\nconsole.log(\"Let's go to the movie theater\");\n} else if (time == \"noon\") {\nconsole.log(\"Let's go to the library\");\n} else {\nconsole.log(\"Let's stay at home\");\n}\n} else {\nconsole.log(\"Let's go for a walk\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 31,
+      "title": "المستوى 31",
+      "content": "المستوى 31",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "function sum(freestyle, breaststroke) {\nlet result = freestyle + breaststroke;\nreturn result;\n}\nconsole.log(sum(39.5, 60.5));\nfunction sum(freestyle, breaststroke) {\nlet time = freestyle + breaststroke;\nreturn time;\n}\nlet teamRed = sum(39.5, 60.5);\nconsole.log(teamRed);\nfunction sum(freestyle, breaststroke, backstroke) {\nlet time = freestyle + breaststroke + backstroke;\nreturn time;\n}\nlet teamRed = sum(39.5, 60.5, 58.5);\nconsole.log(teamRed);\nlet teamBlue = sum(40, 62, 58);\nconsole.log(teamBlue);\nlet teamGreen = sum(41, 59.5, 60);\nconsole.log(teamGreen);\nconsole.log(\"The fastest time is\" + Math.min(158.5, 160, 160.5));\nconsole.log(\"The fastest time is\" + Math.min(teamRed, teamBlue, teamGreen));\nfunction calculation3(a, b, c) {\nlet result = a * b * c;\nreturn result;\n}\nconsole.log(calculation3(2, 3, 4));\nconsole.log(calculation3(3, 5, 10));\nlet num1 = calculation3(5, 10, 15);\nconsole.log(num1);"
+        }
+      ]
+    },
+    {
+      "level": 32,
+      "title": "المستوى 32",
+      "content": "المستوى 32",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let volunteerList = [\"Yes\", \"No\", \"Yes\", \"Yes\", \"Yes\", \"Yes\", \"No\", \"No\", \"Yes\", \"Yes\", \"Yes\", \"No\", \"Yes\", \"No\"];\nfor (let day of volunteerList) {\nconsole.log(day);\n}\nlet count = 0;\nfor (let day of volunteerList) {\nif (day == \"Yes\") {\ncount++;\n}\n}\nconsole.log(count);\nlet count = 0;\nfor (let day of volunteerList) {\nif (day == \"No\") {\ncount++;\n}\n}\nconsole.log(count);\nlet sandwichType = \"strawberry jam\";\nif (sandwichType == \"savory\") {\nconsole.log(\"Check what's inside the sandwich\");\n} else {\nconsole.log(\"Eat strawberry jam sandwich\");\n}\nlet sandwichType = \"savory\";\nlet savory = \"tuna\";\nif (sandwichType == \"savory\") {\nif (savory == \"tuna\") {\nconsole.log(\"Exchange with Cody\");\n} else {\nconsole.log(\"Eat ham sandwich\");\n}\n} else {\nconsole.log(\"Eat strawberry jam sandwich\");\n}\nlet heightList = [154, 138, 140, 180, 170];\nfor (let height of heightList) {\nif (height >= 150) {\nconsole.log(height);\n}\n}\nlet height = 148;\nlet age = 14;\nif (height >= 140) {\nif (age >= 12) {\nconsole.log(\"You can ride alone\");\n} else {\nconsole.log(\"Please ride with someone who is 18 years or older\");\n}\n} else {\nconsole.log(\"You cannot ride\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 33,
+      "title": "المستوى 33",
+      "content": "المستوى 33",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "function sum(freestyle, breaststroke, backstroke) {\nlet result = freestyle + breaststroke + backstroke;\nreturn result;\n}\nlet teamRed = sum(39.5, 60.5, 58.5);\nconsole.log(teamRed);\nlet teamBlue = sum(40, 62, 58);\nconsole.log(teamBlue);\nlet teamGreen = sum(41, 59.5, 60);\nconsole.log(teamGreen);\nconsole.log(\"The fastest time is\" + Math.min(teamRed, teamBlue, teamGreen));\nlet volunteerList = [\"Yes\", \"No\", \"Yes\", \"Yes\", \"Yes\", \"Yes\", \"No\", \"No\", \"Yes\", \"Yes\", \"Yes\", \"No\", \"Yes\", \"No\"];\nfor (let day of volunteerList) {\nconsole.log(day);\n}\nlet count = 0;\nfor (let day of volunteerList) {\nif (day == \"Yes\") {\ncount++;\n}\n}\nconsole.log(count);\nlet weather = \"sunny\";\nif (weather == \"sunny\") {\nconsole.log(\"exercise\");\n} else {\nconsole.log(\"read a book\");\n}\nlet sandwichType = \"savory\";\nlet savory = \"tuna\";\nif (sandwichType == \"savory\") {\nif (savory == \"tuna\") {\nconsole.log(\"Exchange with Cody\");\n} else {\nconsole.log(\"Eat ham sandwich\");\n}\n} else {\nconsole.log(\"Eat strawberry jam sandwich\");\n}\nconsole.log(calc3(3, 5, 10));\nfunction calc3(a, b, c) {\nlet result = a * b * c;\nreturn result;\n}\nlet num1 = calc3(5, 10, 15);\nconsole.log(num1);\nlet num2 = calc3(4, 4, 4);\nconsole.log(num2);\nconsole.log(Math.min(num1, num2, num3));"
+        }
+      ]
+    },
+    {
+      "level": 34,
+      "title": "المستوى 34",
+      "content": "المستوى 34",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "<h1>Sports Tournament Program</h1>\n<p>Events</p>\n<ul>\n<li>Frisbee</li>\n<li>Softball</li>\n<li>Bread-eating race</li>\n</ul>\n<img src=\"sports.png\">\n<p>Let's go to the <span>sea</span></p>\n<p class=\"mountain\">Let's go to the mountains</p>\n<p>Let's go to the <span class=\"sea\">sea</span></p>\n<p>Let's go to the <span class=\"mountain\">mountain</span></p>\n<p>My favorite fruit is <span class=\"apple\">Apple</span></p>\n<p>My favorite animal is <span class=\"giraffe\">Giraffe</span></p>\n<p>Today's shoes are <span class=\"sneaker\">Light blue sneakers</span></p>\n<h1>Event Content Survey</h1>\n<p>Opinion</p>\n<input type=\"text\">\n<input type=\"button\">\n<input type=\"button\" value=\"Submit\">\n<p>Menu</p>\n<ul>\n<li>Hamburger</li>\n<li>Pizza</li>\n<li>Sandwich</li>\n</ul>\n<img src=\"cody.png\">\n<p>Phone Number</p>\n<input type=\"text\">\n<input type=\"button\" value=\"Enter\">"
+        }
+      ]
+    },
+    {
+      "level": 35,
+      "title": "المستوى 35",
+      "content": "المستوى 35",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "h1 {\ncolor: red;\n}\nh1 {\ncolor: red;\nbackground-color: pink;\n}\nli {\nfont-size: 24px;\nfont-weight: 900;\n}\n<h1>Homework List</h1>\n<ul>\n<li>History Study</li>\n<li class=\"blue\">Math Practice</li>\n<li>Essay</li>\n</ul>\n.blue {\ncolor: blue;\n}\n.btn1 {\nbackground-color: aqua;\n}\n.btn2:hover {\nbackground-color: yellow;\n}\n.btn1:hover {\nbackground-color: lime;\n}\n.btn1:hover {\nbackground-color: lime;\ntransition: 2s;\n}\n.btn2:hover {\nbackground-color: yellow;\ntransition: 5s;\n}\nh1 {\nborder: solid;\n}\nh1 {\nborder: double;\n}\nh1 {\nborder: 10px double;\n}\nh1 {\nborder: 10px double blue;\n}"
+        }
+      ]
+    },
+    {
+      "level": 36,
+      "title": "المستوى 36",
+      "content": "المستوى 36",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "<h1>Sports Festival Program</h1>\n<img src=\"sports.png\">\n<p>My favorite fruit is <span class=\"apple\">Apple</span></p>\n<p>My favorite animal is <span class=\"giraffe\">Giraffe</span></p>\n<h1>Event Content Survey</h1>\n<p>Opinion</p>\n<input type=\"text\">\n<input type=\"button\" value=\"Submit\">\nh1 {\nbackground-color: pink;\n}\nli {\nfont-weight: bold;\n}\n.red {\ncolor: red;\n}\n.btn1:hover {\nbackground-color: lime;\n}\n.btn2:hover {\nbackground-color: yellow;\ntransition: 2s;\n}\nh1 {\nborder: 10px double red;\n}\n<p>Menu</p>\n<ul>\n<li>Hamburger</li>\n<li>Pizza</li>\n<li>Sandwich</li>\n</ul>\n<p>Phone Number</p>\n<input type=\"text\">\n<input type=\"button\" value=\"Enter\">\n<input type=\"button\" value=\"Submit\">\n.btn:hover {\nbackground-color: red;\n}\n.btn:hover {\nbackground-color: red;\ntransition: 5s;\n}\nh1 {\nborder: 10px solid blue;\n}"
+        }
+      ]
+    },
+    {
+      "level": 37,
+      "title": "المستوى 37",
+      "content": "المستوى 37",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let bloodType = \"A\";\nif (bloodType == \"A\") {\nconsole.log(\"Today's fortune is decent\");\n}\nlet bloodType = \"B\";\nif (bloodType == \"A\") {\nconsole.log(\"Today's fortune is decent\");\n} else if (bloodType == \"B\") {\nconsole.log(\"Today's fortune is excellent!\");\n} else if (bloodType == \"O\") {\nconsole.log(\"Today's fortune looks good!\");\n} else if (bloodType == \"AB\") {\nconsole.log(\"Today's fortune might not be so good...\");\n}\nlet bloodType = \"Unknown\";\nif (bloodType == \"A\") {\nconsole.log(\"Today's fortune is decent\");\n} else if (bloodType == \"B\") {\nconsole.log(\"Today's fortune is excellent!\");\n} else if (bloodType == \"O\") {\nconsole.log(\"Today's fortune looks good!\");\n} else if (bloodType == \"AB\") {\nconsole.log(\"Today's fortune might not be so good...\");\n} else {\nconsole.log(\"Let's find out your blood type!\");\n}\nlet bloodType = \"B\";\nswitch (bloodType) {\ncase \"A\":\nconsole.log(\"Today's fortune is decent\");\nbreak;\ncase \"B\":\nconsole.log(\"Today's fortune is excellent!\");\nbreak;\ncase \"O\":\nconsole.log(\"Today's fortune looks good!\");\nbreak;\ncase \"AB\":\nconsole.log(\"Today's fortune might not be so good...\");\nbreak;\ndefault:\nconsole.log(\"Let's find out your blood type!\");\nbreak;\n}\nlet bloodType = \"C\";\nswitch (bloodType) {\ncase \"A\":\nconsole.log(\"Today's fortune is decent\");\nbreak;\ncase \"B\":\nconsole.log(\"Today's fortune is excellent!\");\nbreak;\ncase \"O\":\nconsole.log(\"Today's fortune looks good!\");\nbreak;\ncase \"AB\":\nconsole.log(\"Today's fortune might not be so good...\");\nbreak;\ndefault:\nconsole.log(\"Let's find out your blood type!\");\nbreak;\n}\nlet bloodType = \"A\";\nswitch (bloodType) {\ncase \"A\":\nconsole.log(\"Today's fortune is decent\");\nbreak;\n}\nlet bloodType = \"B\";\nswitch (bloodType) {\ncase \"A\":\nconsole.log(\"Today's fortune is decent\");\nbreak;\ncase \"B\":\nconsole.log(\"Today's fortune is excellent!\");\nbreak;\n}"
+        }
+      ]
+    },
+    {
+      "level": 38,
+      "title": "المستوى 38",
+      "content": "المستوى 38",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let cookies = 20;\nconsole.log(cookies / 3);\nlet snacks = 35;\nconsole.log(snacks % 6);\nlet members = 40;\nconsole.log(members % 6);\nlet snacks = 13;\nif (snacks % 3 > 0) {\nconsole.log(\"Rick gets it\");\n}\nlet donuts = 20;\nswitch (donuts % 3) {\ncase 0:\nconsole.log(\"Let's clean up the trash neatly\");\nbreak;\n}\nlet donuts = 20;\nswitch (donuts % 3) {\ncase 0:\nconsole.log(\"Let's clean up the trash neatly\");\nbreak;\ncase 1:\nconsole.log(\"Give it to Mom\");\nbreak;\ncase 2:\nconsole.log(\"Give it to Mom and Dad\");\nbreak;\n}\nlet dayCount = 14;\nif (dayCount % 7 == 0) {\nconsole.log(\"Let's eat a hamburger!\");\n}\nlet dayCount = 11;\nswitch (dayCount % 7) {\ncase 0:\nconsole.log(\"Let's eat a hamburger!\");\nbreak;\ncase 4:\nconsole.log(\"Let's eat steak!\");\nbreak;\n}\nlet number = 20;\nswitch (number % 3) {\ncase 0:\nconsole.log(\"Group A\");\nbreak;\ncase 1:\nconsole.log(\"Group B\");\nbreak;\ncase 2:\nconsole.log(\"Group C\");\nbreak;\n}"
+        }
+      ]
+    },
+    {
+      "level": 39,
+      "title": "المستوى 39",
+      "content": "المستوى 39",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let bloodType = \"Unknown\";\nswitch (bloodType) {\ncase \"A\":\nconsole.log(\"Today's fortune is decent\");\nbreak;\ncase \"B\":\nconsole.log(\"Today's fortune is excellent!\");\nbreak;\ndefault:\nconsole.log(\"Let's find out your blood type!\");\nbreak;\n}\nlet cookies = 20;\nconsole.log(cookies % 3);\nif (cookies % 3 > 0) {\nconsole.log(\"Cody gets it\");\n}\nlet orange = 85;\nswitch (orange % 3) {\ncase 0:\nconsole.log(\"They were divided equally\");\nbreak;\ncase 1:\nconsole.log(\"Give it to Grandma\");\nbreak;\ncase 2:\nconsole.log(\"Give it to the neighbors\");\nbreak;\n}\nlet letter = \"B\";\nswitch (letter) {\ncase \"A\":\nconsole.log(\"Well done!\");\nbreak;\ncase \"B\":\nconsole.log(\"Keep up the good work\");\nbreak;\ncase \"C\":\nconsole.log(\"Let's try a little harder\");\nbreak;\n}\nlet dayCount = 14;\nif (dayCount % 7 == 0) {\nconsole.log(\"Let's eat a hamburger!\");\n}\nlet number = 20;\nswitch (number % 3) {\ncase 0:\nconsole.log(\"Group A\");\nbreak;\ncase 1:\nconsole.log(\"Group B\");\nbreak;\ncase 2:\nconsole.log(\"Group C\");\nbreak;\n}"
+        }
+      ]
+    },
+    {
+      "level": 40,
+      "title": "المستوى 40",
+      "content": "المستوى 40",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let num = 3;\nnum = 5;\nconsole.log(num);\nconst num = 3;\nnum = 5;\nconsole.log(num);\nconst day = 7;\nconsole.log(\"One week is \" + day + \" days\");\nlet day = 30;\nconsole.log(\"September has \" + day + \" days\");\nday = 31;\nconsole.log(\"October has \" + day + \" days\");\nconst myBirthday = \"September 1st\";\nconsole.log(\"My birthday is \" + myBirthday);\nconst weather = \"Cloudy\";\nif (weather != \"Rainy\") {\nconsole.log(\"Play soccer\");\n}\nconst myScore = 90;\nif (myScore != 100) {\nconsole.log(\"Aim for a perfect score!\");\n}\nconst num;\nlet num;\nnum = 3;\nnum = 5;\nconsole.log(num);\nconst answer1 = 1023;\nconst answer2 = 1024;\nif (answer1 != answer2) {\nconsole.log(\"Let's review once more!\");\n}"
+        }
+      ]
+    },
+    {
+      "level": 41,
+      "title": "المستوى 41",
+      "content": "المستوى 41",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let money = 7500;\nconst comics = 425;\nwhile (money > comics) {\nmoney = money - comics;\nconsole.log(money);\n}\nlet money = 520;\nlet count = 0;\nwhile (money < 3800) {\ncount++;\nmoney += 450;\n}\nconsole.log(\"Save for \" + count + \" times\");\nfor (let i = 0; i < 3; i++) {\nconsole.log(\"Programming\");\n}\nwhile ( condition ) {\nprocess;\n}\nlet money = 1000;\nconst snacks = 230;\nwhile (money > snacks) {\nmoney = money - snacks;\nconsole.log(money);\n}\nlet money = 600;\nlet month = 0;\nwhile (money < 4000) {\nmonth++;\nmoney += 800;\n}\nconsole.log(\"Save for \" + month + \" months\");"
+        }
+      ]
+    },
+    {
+      "level": 42,
+      "title": "المستوى 42",
+      "content": "المستوى 42",
+      "blocks": [
+        {
+          "type": "code",
+          "text": "let season = \"spring\";\nconsole.log(\"The current season is \" + season);\nseason = \"summer\";\nconsole.log(\"The next season is \" + season);\nconst day = 7;\nconsole.log(\"One week is \" + day + \" days\");\nconst weather = \"Cloudy\";\nif (weather != \"Rainy\") {\nconsole.log(\"Play soccer\");\n}\nlet money = 520;\nlet count = 0;\nwhile (money < 3800) {\ncount++;\nmoney += 450;\n}\nconsole.log(\"Save for \" + count + \" times\");\nlet num;\nnum = 3;\nnum = 5;\nconsole.log(num);\nwhile ( condition ) {\nprocess;\n}\nlet money = 1000;\nconst snacks = 230;\nwhile (money > snacks) {\nmoney = money - snacks;\nconsole.log(money);\n}\nlet money = 600;\nlet month = 0;\nwhile (money < 4000) {\nmonth++;\nmoney += 800;\n}\nconsole.log(\"Save for \" + month + \" months\");"
+        }
+      ]
+    }
+  ],
+  "finance": []
+};
