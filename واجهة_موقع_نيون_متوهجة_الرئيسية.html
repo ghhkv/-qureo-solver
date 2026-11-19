@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بورتفوليو رقمي | واجهة نيون مستقبلية</title>
+    
+    <!-- تحميل خطوط جوجل العربية العصرية (Cairo & Tajawal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        space: '#05050a',
+                        neonCyan: '#00f3ff',
+                        neonPurple: '#bc13fe',
+                        neonPink: '#ff007f',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- تنسيقات مخصصة للتأثيرات المضيئة والنيون -->
+    <style>
+        :root {
+            --cyan: #00f3ff;
+            --purple: #bc13fe;
+            --pink: #ff007f;
+            --bg-dark: #05050a;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* خلفية الكانفاس التفاعلية */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* توهج النصوص */
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.7), 0 0 30px rgba(0, 243, 255, 0.4);
+        }
+
+        .text-glow-purple {
+            text-shadow: 0 0 12px rgba(188, 19, 254, 0.7), 0 0 30px rgba(188, 19, 254, 0.4);
+        }
+
+        /* نص متدرج مضيء */
+        .gradient-text {
+            background: linear-gradient(135deg, #00f3ff 0%, #bc13fe 50%, #ff007f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientFlow 5s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* البطاقات الزجاجية مع تأثير تتبع الماوس */
+        .neon-card {
+            position: relative;
+            background: rgba(15, 17, 30, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .neon-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(0, 243, 255, 0.14),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .neon-card:hover::before {
+            opacity: 1;
+        }
+
+        .neon-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 243, 255, 0.45);
+            box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.25), 0 0 20px rgba(188, 19, 254, 0.15);
+        }
+
+        /* زر نيون متوهج */
+        .btn-neon-primary {
+            position: relative;
+            background: linear-gradient(90deg, #00f3ff, #bc13fe);
+            color: #05050a;
+            font-weight: 800;
+            border-radius: 0.85rem;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5), 0 0 35px rgba(188, 19, 254, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .btn-neon-primary:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.85), 0 0 55px rgba(188, 19, 254, 0.6);
+        }
+
+        .btn-neon-outline {
+            background: rgba(0, 243, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.5);
+            color: #00f3ff;
+            border-radius: 0.85rem;
+            box-shadow: inset 0 0 12px rgba(0, 243, 255, 0.15), 0 0 15px rgba(0, 243, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon-outline:hover {
+            background: rgba(0, 243, 255, 0.15);
+            border-color: #00f3ff;
+            box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.3), 0 0 25px rgba(0, 243, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* تأثير الطفو */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* هالات ضوئية خلفية */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(110px);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        /* مؤشر الكتابة */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background-color: #00f3ff;
+            margin-right: 4px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+            box-shadow: 0 0 10px #00f3ff;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* شريط التمرير المخصص */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05050a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00f3ff, #bc13fe);
+            border-radius: 10px;
+        }
+
+        /* إشعار التوست */
+        #toast {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neonCyan selection:text-space">
+
+    <!-- خلفية الجزيئات التفاعلية -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- هالات إضاءة نيون في الخلفية -->
+    <div class="ambient-orb w-96 h-96 bg-neonCyan top-[-5%] right-[-5%]"></div>
+    <div class="ambient-orb w-[30rem] h-[30rem] bg-neonPurple bottom-[10%] left-[-10%]"></div>
+    <div class="ambient-orb w-80 h-80 bg-neonPink top-[45%] right-[35%] opacity-20"></div>
+
+    <!-- ==================== شريط التنقل العلوي (Navbar) ==================== -->
+    <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+            <nav class="neon-card px-5 py-3.5 flex items-center justify-between !rounded-2xl border-white/10">
+                <!-- الشعار المضيء -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-neonCyan to-neonPurple p-[2px] shadow-[0_0_15px_rgba(0,243,255,0.5)] group-hover:shadow-[0_0_25px_rgba(188,19,254,0.8)] transition-all">
+                        <div class="w-full h-full bg-space rounded-[10px] flex items-center justify-center text-neonCyan font-heading font-black text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                    </div>
+                    <span class="font-heading font-black text-xl tracking-wide text-white">
+                        أحمد<span class="text-neonCyan text-glow-cyan">.ديف</span>
+                    </span>
+                </a>
+
+                <!-- روابط التنقل للشاشات الكبيرة -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-300">
+                    <a href="#home" class="hover:text-neonCyan transition-colors">الرئيسية</a>
+                    <a href="#services" class="hover:text-neonCyan transition-colors">مهاراتي</a>
+                    <a href="#projects" class="hover:text-neonCyan transition-colors">أعمالي</a>
+                    <a href="#stats" class="hover:text-neonCyan transition-colors">إنجازات</a>
+                </div>
+
+                <!-- زر تواصل وزر القائمة للموبايل -->
+                <div class="flex items-center gap-3">
+                    <a href="#contact" class="btn-neon-primary px-5 py-2.5 text-sm font-heading hidden sm:inline-flex items-center gap-2">
+                        <span>تواصل معي</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </a>
+                    <button id="mobile-menu-btn" aria-label="فتح القائمة" class="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-neonCyan hover:bg-white/10">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- قائمة الموبايل المنسدلة -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 neon-card p-5 space-y-3 text-center font-bold">
+                <a href="#home" class="block py-2 text-slate-200 hover:text-neonCyan">الرئيسية</a>
+                <a href="#services" class="block py-2 text-slate-200 hover:text-neonCyan">مهاراتي</a>
+                <a href="#projects" class="block py-2 text-slate-200 hover:text-neonCyan">أعمالي</a>
+                <a href="#stats" class="block py-2 text-slate-200 hover:text-neonCyan">إنجازات</a>
+                <a href="#contact" class="btn-neon-primary block py-2.5 mt-2">تواصل معي</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== القسم الرئيسي (Hero Section) ==================== -->
+    <main>
+        <section id="home" class="min-h-screen flex items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- النص والأزرار (يمين) -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-neonCyan/10 border border-neonCyan/30 text-neonCyan text-sm font-bold shadow-[0_0_20px_rgba(0,243,255,0.2)]">
+                        <span class="w-2.5 h-2.5 rounded-full bg-neonCyan animate-ping"></span>
+                        <span>متاح للمشاريع الإبداعية والعمل الحر</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white">
+                        أهلاً بك في عالمي الرقمي، أنا <br>
+                        <span class="gradient-text">مطور ومصمم المستقبل</span>
+                    </h1>
+
+                    <div class="text-xl sm:text-2xl font-bold text-slate-300 h-10 flex items-center justify-center lg:justify-start">
+                        <span>أقوم ببناء:&nbsp;</span>
+                        <span id="typing-text" class="text-neonCyan text-glow-cyan"></span>
+                        <span class="typing-cursor"></span>
+                    </div>
+
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        أحوّل الأفكار الطموحة إلى تجارب ويب تفاعلية فائقة السرعة، بتصاميم عصرية تخطف الأنظار وتجمع بين جمالية الإضاءة النيونية وأحدث تقنيات البرمجة.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#projects" class="btn-neon-primary px-7 py-3.5 text-base font-heading inline-flex items-center gap-2.5">
+                            <span>استكشف أعمالي</span>
+                            <i class="fa-solid fa-rocket"></i>
+                        </a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-neon-outline px-7 py-3.5 text-base font-heading inline-flex items-center gap-2.5">
+                            <i class="fa-brands fa-github text-xl"></i>
+                            <span>حسابي على GitHub</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- بطاقة تفاعلية ثلاثية الأبعاد (يسار) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="neon-card animate-float w-full max-w-md p-6 sm:p-8 border-neonCyan/30 shadow-[0_0_50px_rgba(0,243,255,0.15)]">
+                        <!-- شريط نافذة الكود -->
+                        <div class="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-neonPink shadow-[0_0_8px_#ff007f]"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]"></span>
+                                <span class="w-3 h-3 rounded-full bg-neonCyan shadow-[0_0_8px_#00f3ff]"></span>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400">profile.config.js</span>
+                        </div>
+
+                        <!-- محتوى البطاقة البرمجي المضيء -->
+                        <div class="space-y-4 font-mono text-sm text-left" dir="ltr">
+                            <div class="text-slate-400">// Futuristic Developer Card</div>
+                            <div>
+                                <span class="text-neonPurple">const</span> <span class="text-neonCyan">creator</span> = {
+                            </div>
+                            <div class="pl-4 space-y-1.5">
+                                <div><span class="text-slate-300">name:</span> <span class="text-emerald-400">"Ahmed Dev"</span>,</div>
+                                <div><span class="text-slate-300">role:</span> <span class="text-emerald-400">"Full-Stack & UI/UX"</span>,</div>
+                                <div><span class="text-slate-300">glowLevel:</span> <span class="text-neonPink font-bold">"MAXIMUM ⚡"</span>,</div>
+                                <div><span class="text-slate-300">skills:</span> [<span class="text-amber-300">"HTML5"</span>, <span class="text-amber-300">"JS"</span>, <span class="text-amber-300">"Tailwind"</span>, <span class="text-amber-300">"React"</span>]</div>
+                            </div>
+                            <div>};</div>
+                        </div>
+
+                        <!-- شريط حالة تفاعلي بالأسفل -->
+                        <div class="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-neonPurple/20 border border-neonPurple flex items-center justify-center text-neonPurple shadow-[0_0_15px_rgba(188,19,254,0.4)]">
+                                    <i class="fa-solid fa-code"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">حالة النظام</div>
+                                    <div class="text-sm font-bold text-neonCyan">جاهز للإطلاق 100%</div>
+                                </div>
+                            </div>
+                            <button onclick="triggerPulseEffect()" class="px-3.5 py-2 rounded-lg bg-neonPurple/20 border border-neonPurple/50 text-neonPurple hover:bg-neonPurple hover:text-white text-xs font-bold transition-all shadow-[0_0_15px_rgba(188,19,254,0.3)]">
+                                نبضة طاقة ✨
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== قسم المهارات والخدمات (Services) ==================== -->
+        <section id="services" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-neonCyan font-bold text-sm tracking-wider uppercase">خبراتي التقنية</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white">ماذا أقدم لمشروعك القادم؟</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-neonCyan via-neonPurple to-neonPink mx-auto rounded-full shadow-[0_0_12px_#00f3ff]"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                    <!-- بطاقة 1 -->
+                    <div class="neon-card p-7 space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-neonCyan/10 border border-neonCyan/40 flex items-center justify-center text-2xl text-neonCyan shadow-[0_0_20px_rgba(0,243,255,0.25)]">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">تطوير مواقع الويب الحديثة</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            بناء مواقع وتطبيقات ويب متجاوبة بالكامل مع جميع الشاشات بأكواد نظيفة وسرعة تحميل فائقة ومهيأة لمحركات البحث.
+                        </p>
+                    </div>
+
+                    <!-- بطاقة 2 -->
+                    <div class="neon-card p-7 space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-neonPurple/10 border border-neonPurple/40 flex items-center justify-center text-2xl text-neonPurple shadow-[0_0_20px_rgba(188,19,254,0.25)]">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">تصميم واجهات تفاعلية UI/UX</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            تصميم تجارب مستخدم جذابة تعتمد على التأثيرات البصرية الحديثة، الألوان المتناسقة، والحركات الانسيابية التي تبهر الزوار.
+                        </p>
+                    </div>
+
+                    <!-- بطاقة 3 -->
+                    <div class="neon-card p-7 space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-neonPink/10 border border-neonPink/40 flex items-center justify-center text-2xl text-neonPink shadow-[0_0_20px_rgba(255,0,127,0.25)]">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">أداء فائق وحماية متكاملة</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            تحسين أداء المواقع واستضافتها على منصات سحابية مثل GitHub Pages لضمان استقرار دائم وتجربة تصفح بلا توقف.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== قسم أحدث المشاريع (Projects) ==================== -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div class="space-y-3">
+                        <span class="text-neonPurple font-bold text-sm">معرض الأعمال</span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white">أحدث المشاريع المختارة</h2>
+                    </div>
+
+                    <!-- أزرار فلترة المشاريع -->
+                    <div class="flex flex-wrap gap-2" id="project-filters">
+                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-bold bg-neonCyan text-space shadow-[0_0_15px_rgba(0,243,255,0.5)] transition-all">الكل</button>
+                        <button data-filter="web" class="filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-white/5 text-slate-300 border border-white/10 hover:border-neonCyan/50 transition-all">مواقع ويب</button>
+                        <button data-filter="ui" class="filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-white/5 text-slate-300 border border-white/10 hover:border-neonCyan/50 transition-all">تصميم واجهات</button>
+                    </div>
+                </div>
+
+                <!-- شبكة المشاريع -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                    <!-- مشروع 1 -->
+                    <article class="neon-card project-item group flex flex-col" data-category="web">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-cyan-900/40 via-slate-900 to-purple-900/40 flex items-center justify-center">
+                            <i class="fa-solid fa-globe text-6xl text-neonCyan/70 group-hover:scale-110 group-hover:text-neonCyan transition-all duration-500 drop-shadow-[0_0_15px_rgba(0,243,255,0.6)]"></i>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-space/80 text-neonCyan border border-neonCyan/40">تطبيق ويب</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonCyan transition-colors">منصة التجارة الذكية</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    متجر إلكتروني متكامل بواجهة داكنة وعرض تفاعلي للمنتجات مع سلة مشتريات فورية.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                <div class="flex gap-2 text-xs font-mono text-neonPurple">
+                                    <span>#HTML5</span>
+                                    <span>#Tailwind</span>
+                                </div>
+                                <div class="flex gap-3 text-slate-300">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="كود المشروع" class="hover:text-neonCyan transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                                    <a href="#projects" onclick="openProjectPreview('منصة التجارة الذكية', 'تجربة تسوق مستقبلية تعتمد على السرعة والوضوح البصري مع لوحة تحكم متكاملة.')" aria-label="معاينة" class="hover:text-neonPink transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- مشروع 2 -->
+                    <article class="neon-card project-item group flex flex-col" data-category="ui">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-purple-900/40 via-slate-900 to-pink-900/40 flex items-center justify-center">
+                            <i class="fa-solid fa-layer-group text-6xl text-neonPurple/70 group-hover:scale-110 group-hover:text-neonPurple transition-all duration-500 drop-shadow-[0_0_15px_rgba(188,19,254,0.6)]"></i>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-space/80 text-neonPurple border border-neonPurple/40">تصميم UI</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonPurple transition-colors">لوحة تحكم الذكاء الاصطناعي</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    واجهة تحليل بيانات وإحصائيات حية بتأثيرات زجاجية وإضاءة نيون تفاعلية.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                <div class="flex gap-2 text-xs font-mono text-neonCyan">
+                                    <span>#JavaScript</span>
+                                    <span>#Canvas</span>
+                                </div>
+                                <div class="flex gap-3 text-slate-300">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="كود المشروع" class="hover:text-neonCyan transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                                    <a href="#projects" onclick="openProjectPreview('لوحة تحكم الذكاء الاصطناعي', 'نظام عرض بيانات تفاعلي يتيح مراقبة الأداء في الوقت الفعلي برسوم بيانية مضيئة.')" aria-label="معاينة" class="hover:text-neonPink transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- مشروع 3 -->
+                    <article class="neon-card project-item group flex flex-col" data-category="web">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-pink-900/40 via-slate-900 to-cyan-900/40 flex items-center justify-center">
+                            <i class="fa-solid fa-gamepad text-6xl text-neonPink/70 group-hover:scale-110 group-hover:text-neonPink transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,0,127,0.6)]"></i>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold bg-space/80 text-neonPink border border-neonPink/40">تفاعلي</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-neonPink transition-colors">منصة الألعاب السحابية</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    بوابة مجتمعية للاعبين مع بطاقات ملفات شخصية متحركة ونظام تصنيف مباشر.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                <div class="flex gap-2 text-xs font-mono text-neonPink">
+                                    <span>#CSS3</span>
+                                    <span>#Animations</span>
+                                </div>
+                                <div class="flex gap-3 text-slate-300">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="كود المشروع" class="hover:text-neonCyan transition-colors"><i class="fa-brands fa-github text-lg"></i></a>
+                                    <a href="#projects" onclick="openProjectPreview('منصة الألعاب السحابية', 'منصة تجمع عشاق الألعاب بتصميم سايبربانك متوهج وسرعة استجابة عالية.')" aria-label="معاينة" class="hover:text-neonPink transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== قسم الإحصائيات (Stats Counter) ==================== -->
+        <section id="stats" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="neon-card p-8 sm:p-12 border-neonPurple/30">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                        <div class="space-y-2">
+                            <div class="text-3xl sm:text-5xl font-black text-neonCyan text-glow-cyan counter" data-target="45">0</div>
+                            <div class="text-slate-400 font-bold text-sm sm:text-base">مشروع مكتمل</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-3xl sm:text-5xl font-black text-neonPurple text-glow-purple counter" data-target="32">0</div>
+                            <div class="text-slate-400 font-bold text-sm sm:text-base">عميل سعيد</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-3xl sm:text-5xl font-black text-neonPink counter" data-target="120">0</div>
+                            <div class="text-slate-400 font-bold text-sm sm:text-base">مستودع GitHub</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-3xl sm:text-5xl font-black text-white counter" data-target="99">0</div>
+                            <div class="text-slate-400 font-bold text-sm sm:text-base">نسبة الرضا %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== قسم التواصل (Contact Section) ==================== -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="neon-card p-8 sm:p-12 border-neonCyan/30">
+                    <div class="text-center space-y-3 mb-10">
+                        <span class="text-neonCyan font-bold text-sm">هل لديك فكرة رائعة؟</span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white">لنبني شيئاً خرافياً معاً</h2>
+                        <p class="text-slate-400 text-sm sm:text-base">أرسل لي رسالة مباشرة أو تواصل معي عبر منصات التواصل الاجتماعي</p>
+                    </div>
+
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-300 mb-2">الاسم الكريم</label>
+                                <input type="text" required placeholder="اكتب اسمك هنا..." class="w-full px-4 py-3 rounded-xl bg-space/80 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-neonCyan focus:shadow-[0_0_15px_rgba(0,243,255,0.3)] transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-300 mb-2">البريد الإلكتروني</label>
+                                <input type="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl bg-space/80 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-neonCyan focus:shadow-[0_0_15px_rgba(0,243,255,0.3)] transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-300 mb-2">تفاصيل رسالتك</label>
+                            <textarea rows="4" required placeholder="حدثني عن مشروعك أو فكرتك..." class="w-full px-4 py-3 rounded-xl bg-space/80 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-neonPurple focus:shadow-[0_0_15px_rgba(188,19,254,0.3)] transition-all"></textarea>
+                        </div>
+                        <button type="submit" class="btn-neon-primary w-full py-4 text-base font-heading flex items-center justify-center gap-2">
+                            <span>إرسال الرسالة الآن</span>
+                            <i class="fa-solid fa-bolt"></i>
+                        </button>
+                    </form>
+
+                    <!-- أيقونات التواصل الاجتماعي المضيئة -->
+                    <div class="mt-10 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-4">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-slate-300 hover:text-neonCyan hover:border-neonCyan hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-slate-300 hover:text-neonCyan hover:border-neonCyan hover:shadow-[0_0_20px_rgba(0,243,255,0.5)] transition-all">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X Twitter" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-slate-300 hover:text-neonPurple hover:border-neonPurple hover:shadow-[0_0_20px_rgba(188,19,254,0.5)] transition-all">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="mailto:hello@example.com" aria-label="Email" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl text-slate-300 hover:text-neonPink hover:border-neonPink hover:shadow-[0_0_20px_rgba(255,0,127,0.5)] transition-all">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== التذييل (Footer) ==================== -->
+    <footer class="border-t border-white/10 py-8 px-4 text-center text-slate-400 text-sm bg-space/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>تم التصميم والتطوير بكل شغف وإضاءة نيون ⚡ &copy; <span id="year"></span></p>
+            <p class="text-xs text-slate-500">جاهز للاستضافة على GitHub Pages</p>
+        </div>
+    </footer>
+
+    <!-- ==================== نافذة معاينة المشروع (Modal) ==================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="neon-card max-w-lg w-full p-7 border-neonCyan/50 shadow-[0_0_40px_rgba(0,243,255,0.3)] space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 id="modal-title" class="text-2xl font-black text-neonCyan">عنوان المشروع</h3>
+                <button onclick="closeProjectModal()" class="w-9 h-9 rounded-lg bg-white/10 text-white hover:bg-neonPink transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p id="modal-desc" class="text-slate-300 leading-relaxed"></p>
+            <div class="pt-4 flex justify-end gap-3">
+                <button onclick="closeProjectModal()" class="btn-neon-outline px-5 py-2 text-sm font-bold">إغلاق</button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-neon-primary px-5 py-2 text-sm font-bold">زيارة المستودع</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== إشعار منبثق (Toast Notification) ==================== -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 translate-y-24 opacity-0 pointer-events-none">
+        <div class="neon-card px-5 py-3.5 border-neonCyan flex items-center gap-3 shadow-[0_0_25px_rgba(0,243,255,0.4)]">
+            <i class="fa-solid fa-circle-check text-neonCyan text-xl"></i>
+            <span id="toast-msg" class="text-sm font-bold text-white">تم إرسال رسالتك بنجاح!</span>
+        </div>
+    </div>
+
+    <!-- ==================== الأكواد البرمجية التفاعلية (JavaScript) ==================== -->
+    <script>
+        // 1. تحديث السنة تلقائياً في الفوتر
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. قائمة الموبايل
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 3. تأثير تتبع إضاءة الماوس على جميع البطاقات (Spotlight Effect)
+        document.querySelectorAll('.neon-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 4. تأثير الكتابة الآلية التفاعلي (Typing Effect)
+        const phrases = [
+            "مواقع ويب عصرية فائقة السرعة",
+            "واجهات مستخدم بتأثيرات نيون ساحرة",
+            "تجارب رقمية تفاعلية لا تُنسى",
+            "مشاريع مفتوحة المصدر على GitHub"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingEl = document.getElementById('typing-text');
+
+        function typeLoop() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typingEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 45 : 85;
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                speed = 1800; // توقف عند اكتمال الجملة
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                speed = 400;
+            }
+            setTimeout(typeLoop, speed);
+        }
+        typeLoop();
+
+        // 5. فلترة المشاريع
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // تحديث شكل الأزرار
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-neonCyan', 'text-space', 'shadow-[0_0_15px_rgba(0,243,255,0.5)]');
+                    b.classList.add('bg-white/5', 'text-slate-300', 'border', 'border-white/10');
+                });
+                btn.classList.add('bg-neonCyan', 'text-space', 'shadow-[0_0_15px_rgba(0,243,255,0.5)]');
+                btn.classList.remove('bg-white/5', 'text-slate-300', 'border', 'border-white/10');
+
+                const filter = btn.getAttribute('data-filter');
+                projectItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 6. عداد الأرقام التفاعلي عند التمرير (Stats Counter)
+        const counters = document.querySelectorAll('.counter');
+        let counterStarted = false;
+
+        function runCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 1800;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current) + "+";
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + "+";
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        const statsObserver = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && !counterStarted) {
+                counterStarted = true;
+                runCounters();
+            }
+        }, { threshold: 0.4 });
+        statsObserver.observe(document.getElementById('stats'));
+
+        // 7. نافذة معاينة المشروع والإشعارات
+        function openProjectPreview(title, desc) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-desc').textContent = desc;
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = message;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', e => {
+            e.preventDefault();
+            showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً ⚡');
+            e.target.reset();
+        });
+
+        // 8. خلفية جزيئات النيون التفاعلية (Interactive Particle Network Canvas)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 140 };
+        let pulseBoost = 1;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function triggerPulseEffect() {
+            pulseBoost = 4;
+            showToast('تم تفعيل نبضة الطاقة النيونية! ⚡');
+            setTimeout(() => { pulseBoost = 1; }, 1200);
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                const colors = ['#00f3ff', '#bc13fe', '#ff007f'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            update() {
+                this.x += this.vx * pulseBoost;
+                this.y += this.vy * pulseBoost;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // تفاعل الجزيئات مع حركة الماوس
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < mouse.radius) {
+                        const force = (mouse.radius - dist) / mouse.radius;
+                        this.x -= (dx / dist) * force * 2.5;
+                        this.y -= (dy / dist) * force * 2.5;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 14000), 95);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+        window.addEventListener('resize', initParticles);
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // رسم خطوط متوهجة بين الجزيئات القريبة
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.hypot(dx, dy);
+
+                    if (dist < 125) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${0.22 * (1 - dist / 125)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+    </script>
+</body>
+</html>
