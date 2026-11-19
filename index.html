@@ -90,7 +90,8 @@
     .quiz-option.wrong { background: rgba(255, 71, 87, 0.2); border-color: var(--danger); }
 
     .category-pills { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-    .cat-pill { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--line); cursor: pointer; font-weight: bold; }
+    .cat-pill { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--line); cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .cat-pill:hover { border-color: var(--cyan); }
     .cat-pill.active { background: var(--purple); color: #fff; border-color: var(--purple); }
 
     @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:35px}.feature-grid{grid-template-columns:1fr}.workspace{padding:17px}.nav{padding:12px 0}.frame-wrap{min-height:440px}.hero-copy{padding:24px}}
@@ -158,7 +159,20 @@
     <!-- المكتبة -->
     <section id="view-library" class="panel workspace hidden">
       <div class="section-heading"><div><span class="eyebrow">المكتبة الرقمية</span><h2>المراجعات والمذكرات والكتب</h2></div></div>
-      <p class="muted">تصفح أفضل المذكرات والكتب التعليمية (الرياضيات، اللغة العربية، وغيرها). يمكنك قراءتها مباشرة أو تحميلها.</p>
+      <p class="muted">تصفح أفضل المذكرات والكتب التعليمية مقسمة حسب المادة وفرع اللغة العربية. يمكنك القراءة مباشرة أو التحميل.</p>
+
+      <div class="category-pills" id="library-categories">
+        <div class="cat-pill active" data-lib-cat="all">الكل</div>
+        <div class="cat-pill" data-lib-cat="اللغة العربية">اللغة العربية (شامل)</div>
+        <div class="cat-pill" data-lib-cat="البلاغة">البلاغة</div>
+        <div class="cat-pill" data-lib-cat="الأدب">الأدب</div>
+        <div class="cat-pill" data-lib-cat="القراءة">القراءة</div>
+        <div class="cat-pill" data-lib-cat="النصوص">النصوص</div>
+        <div class="cat-pill" data-lib-cat="النحو">النحو</div>
+        <div class="cat-pill" data-lib-cat="الفرنساوي">اللغة الفرنسية</div>
+        <div class="cat-pill" data-lib-cat="مواد أخرى">باقي المواد</div>
+      </div>
+
       <div id="library-grid" style="margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;"></div>
     </section>
 
@@ -250,9 +264,10 @@
       btn.addEventListener('click', () => switchView(btn.dataset.go));
     });
 
-    // متغيرات عامة للاختبارات
+    // متغيرات عامة للاختبارات والمكتبة
     let quizData = [];
     let currentCategory = 'all';
+    let currentLibCategory = 'all';
     let userAnswers = {};
 
     // 1. الوضع الليلي والنهاري
@@ -355,47 +370,126 @@
       localStorage.setItem(`quiz_score_${currentCategory}`, `${score}/${totalQuestions} (${percentage}%)`);
     }
 
-    // 4. دالة عرض المكتبة (شاملة كتب الرياضيات واللغة العربية + مذكرات المستودع)
+    // فلتر أقسام المكتبة
+    $$('#library-categories .cat-pill').forEach((pill) => {
+      pill.addEventListener('click', () => {
+        $$('#library-categories .cat-pill').forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentLibCategory = pill.dataset.libCat;
+        renderLibrary();
+      });
+    });
+
+    // 4. دالة عرض المكتبة مع تقسيم فروع اللغة العربية وكتاب الفرنساوي
     function renderLibrary() {
       const libraryData = [
         {
-          title: "كتاب الرياضيات (المسار العلمي / الأول الثانوي)",
-          desc: "النسخة الرسمية من بوابة وزارة التربية والتعليم — جاهز للفتح والتحميل مباشرة على GitHub Pages",
+          title: "قسم البلاغة — اللغة العربية",
+          category: "البلاغة",
+          desc: "كتاب ومراجعة البلاغة للصف الأول الثانوي (التشبيه، الاستعارة، الكناية، المجاز المرسل) — ارفع ملف balagha.pdf في المستودع",
+          file: "balagha.pdf",
+          color: "#b74cff"
+        },
+        {
+          title: "قسم الأدب — اللغة العربية",
+          category: "الأدب",
+          desc: "كتاب ومراجعة الأدب وتاريخ العصور الأدبية للصف الأول الثانوي — ارفع ملف adab.pdf في المستودع",
+          file: "adab.pdf",
+          color: "#b74cff"
+        },
+        {
+          title: "قسم القراءة — اللغة العربية",
+          category: "القراءة",
+          desc: "كتاب وموضوعات القراءة المتحررة والمقررة للصف الأول الثانوي — ارفع ملف qiraa.pdf في المستودع",
+          file: "qiraa.pdf",
+          color: "#b74cff"
+        },
+        {
+          title: "قسم النصوص — اللغة العربية",
+          category: "النصوص",
+          desc: "كتاب النصوص الشعرية والنثرية وتحليلها للصف الأول الثانوي — ارفع ملف nosos.pdf في المستودع",
+          file: "nosos.pdf",
+          color: "#b74cff"
+        },
+        {
+          title: "كتاب اللغة الفرنسية (الفرنساوي)",
+          category: "الفرنساوي",
+          desc: "كتاب ومذكرة اللغة الفرنسية (Club @dos plus 1) للصف الأول الثانوي — ارفع ملف french.pdf في المستودع",
+          file: "french.pdf",
+          color: "#00e5ff"
+        },
+        {
+          title: "كتاب الرياضيات (الوزارة)",
+          category: "مواد أخرى",
+          desc: "النسخة الرسمية من بوابة وزارة التربية والتعليم — جاهز للفتح والتحميل مباشرة",
           file: "https://moe.gov.eg/media/vxjoayuu/01-g10.pdf",
           color: "#00e5ff",
           external: true
         },
         {
-          title: "كتاب اللغة العربية (الأول الثانوي)",
-          desc: "النسخة الرسمية من بوابة وزارة التربية والتعليم — جاهز للفتح والتحميل مباشرة على GitHub Pages",
-          file: "https://moe.gov.eg/media/hmhfsxfh/01-g10.pdf",
-          color: "#b74cff",
-          external: true
+          title: "مذكرة اللغة العربية (شامل)",
+          category: "اللغة العربية",
+          desc: "إعداد: أ. محمد صلاح - 1 ثانوي - ترم 1",
+          file: "مذكرة لغة عربية - 1 ثانوي - ترم 1 - موقع مذكرة.pdf",
+          color: "#b74cff"
         },
         {
-          title: "نموذج اختبار وقوانين (علوم ورياضيات/فيزياء)",
-          desc: "ملف تدريبي وقوانين رسمية من وزارة التربية والتعليم",
-          file: "https://moe.gov.eg/media/2oknj0fj/01-g10.pdf",
-          color: "#ffbf47",
-          external: true
+          title: "مذكرة النحو الشاملة",
+          category: "النحو",
+          desc: "الصف الأول الثانوي - الترم الأول",
+          file: "arabic2.pdf",
+          color: "#b74cff"
         },
-        { title: "مذكرة الأوائل في الرياضيات", desc: "مذكرة الرياضيات - الصف الأول الثانوي - ترم أول", file: "مذكرة_الأوائل_في_الرياضيات_للصف_الاول_الثانوي_ترم_اول.pdf", color: "#00e5ff" },
-        { title: "مذكرة الرياضيات - البكالوريا", desc: "الصف الثاني المسار الطبي - إعداد: أ. محمد أحمد الفار", file: "math.pdf", color: "#00e5ff" },
-        { title: "مذكرة اللغة العربية", desc: "إعداد: أ. محمد صلاح - 1 ثانوي - ترم 1", file: "مذكرة لغة عربية - 1 ثانوي - ترم 1 - موقع مذكرة.pdf", color: "#b74cff" },
-        { title: "مذكرة النحو الشاملة", desc: "الصف الأول الثانوي - الترم الأول", file: "arabic2.pdf", color: "#b74cff" },
-        { title: "مذكرة اللغة الإنجليزية", desc: "إعداد: أ. السباعي عطية", file: "English.pdf", color: "#ffbf47" },
-        { title: "مذكرة العزة في التاريخ", desc: "مذكرة التاريخ للصف الأول الثانوي", file: "history.pdf", color: "#ffbf47" },
-        { title: "مذكرة سى والثالث والرابع", desc: "مذكرة جاهزة للتحميل", file: "since.pdf", color: "#25D366" }
+        {
+          title: "مذكرة الأوائل في الرياضيات",
+          category: "مواد أخرى",
+          desc: "مذكرة الرياضيات - الصف الأول الثانوي - ترم أول",
+          file: "مذكرة_الأوائل_في_الرياضيات_للصف_الاول_الثانوي_ترم_اول.pdf",
+          color: "#00e5ff"
+        },
+        {
+          title: "مذكرة الرياضيات - البكالوريا",
+          category: "مواد أخرى",
+          desc: "الصف الثاني المسار الطبي - إعداد: أ. محمد أحمد الفار",
+          file: "math.pdf",
+          color: "#00e5ff"
+        },
+        {
+          title: "مذكرة اللغة الإنجليزية",
+          category: "مواد أخرى",
+          desc: "إعداد: أ. السباعي عطية",
+          file: "English.pdf",
+          color: "#ffbf47"
+        },
+        {
+          title: "مذكرة العزة في التاريخ",
+          category: "مواد أخرى",
+          desc: "مذكرة التاريخ للصف الأول الثانوي",
+          file: "history.pdf",
+          color: "#ffbf47"
+        },
+        {
+          title: "مذكرة سى والثالث والرابع",
+          category: "مواد أخرى",
+          desc: "مذكرة جاهزة للتحميل",
+          file: "since.pdf",
+          color: "#25D366"
+        }
       ];
 
       const grid = document.getElementById('library-grid');
       if (!grid) return;
 
-      grid.innerHTML = libraryData.map((item) => {
+      const filtered = libraryData.filter((item) => currentLibCategory === 'all' || item.category === currentLibCategory);
+
+      grid.innerHTML = filtered.map((item) => {
         const hrefUrl = item.external ? item.file : encodeURI(item.file);
         return `
           <article class="solution-card" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
-            <h3 style="color: ${item.color}; margin: 0;">${esc(item.title)}</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+              <h3 style="color: ${item.color}; margin: 0;">${esc(item.title)}</h3>
+              <span style="font-size:12px; padding:3px 10px; border-radius:12px; border:1px solid var(--line); color:var(--muted); white-space:nowrap;">${esc(item.category)}</span>
+            </div>
             <p style="color: var(--muted); margin: 0; font-size: 14px;">${esc(item.desc)}</p>
             <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 10px;">
               <a href="${hrefUrl}" target="_blank" rel="noopener noreferrer" class="btn primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; flex: 1;">قراءة 📖</a>
@@ -407,7 +501,7 @@
     }
 
     // 5. دالة عرض الحلول وتتبع التقدم
-    function markDone(level, btnEl) {
+    function markDone(level) {
       const saved = JSON.parse(localStorage.getItem('completed_levels') || '[]');
       const key = String(level);
       const idx = saved.indexOf(key);
@@ -436,7 +530,6 @@
       if (notice) notice.classList.toggle('hidden', data.length > 0);
 
       const query = $('#query').value.trim().toLowerCase();
-      const level = $('#level').value;
       const sel = $('#level');
       const old = sel.value;
 
@@ -475,7 +568,7 @@
           <article class="solution-card">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
               <h3>المستوى ${esc(x.level)}: ${esc(x.title || '')}</h3>
-              <button class="btn" onclick="markDone('${esc(x.level)}', this)" style="background:${isDone ? 'var(--success)' : 'transparent'}; color:${isDone ? '#071018' : 'var(--text)'}; font-weight:bold;">
+              <button class="btn" onclick="markDone('${esc(x.level)}')" style="background:${isDone ? 'var(--success)' : 'transparent'}; color:${isDone ? '#071018' : 'var(--text)'}; font-weight:bold;">
                 ${isDone ? 'مكتمل ✔️' : 'تحديد كمكتمل'}
               </button>
             </div>
@@ -507,7 +600,6 @@
       reader.readAsText(file);
     });
 
-    // خلفية النجوم الخفيفة
     (function initStars() {
       const canvas = document.getElementById('stars');
       if (!canvas) return;
@@ -540,7 +632,6 @@
       window.addEventListener('resize', resize);
     })();
 
-    // تشغيل أولي للحلول إذا كانت بيانات data.js محملة
     renderSolutions();
   </script>
 </body>
