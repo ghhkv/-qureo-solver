@@ -1,0 +1,232 @@
+{
+  "quizzes": [
+    {
+      "category": "منهج",
+      "question": "ما معنى كلمة (الرتيب) في سياق الفقرة الثانية؟",
+      "options": ["المرتب المهندم", "الثابت على حاله", "الكبير الحجم", "الخامل البطيء"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "أي مما يلي يعبر عن المفهوم الصحيح للتحول الرقمي في الفقرة الثانية؟",
+      "options": ["الاعتماد على البريد الإلكتروني", "الاستعانة بالبرامج الجديدة", "تسخير التكنولوجيا لخدمة الإنسان", "وضع الخطط الاستراتيجية"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "ما علاقة قوله: (أن التكنولوجيا غيرت من طريقة تفكير وسلوك المستهلكين) بما قبله في الفقرة الثالثة؟",
+      "options": ["تعليل", "نتيجة", "تأكيد", "تفصيل"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "ما المغزى من قول الكاتب: (فهو عملية طويلة ومتعبة، لكنها مهمة) في الفقرة الرابعة؟",
+      "options": ["الإصرار على التحول الرقمي لتحقيق فوائده", "مشقة الشركات للتحول الرقمي وعدم جدواه", "التحول الرقمي ليس سهلاً أبداً", "ضرورة التحول الرقمي رغم صعوبة تحقيقه"],
+      "correct": 3
+    },
+    {
+      "category": "منهج",
+      "question": "حدد السبب الذي دفع الكثير من الشركات إلى التحول الرقمي.",
+      "options": ["دعم العملاء لغالبية الشركات عن طريق حسابات إلكترونية", "التكنولوجيا غيرت من طريقة تفكير وسلوك المستهلكين", "بحث الشركات عن طريقة جديدة لتقديم العمل وتزيد الإنتاج", "السير على نهج الشركات العالمية لضمان النجاح المحقق"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "ما معنى كلمة (تزكو) في البيت الثاني؟",
+      "options": ["ترتفع", "تزيد", "تنمأ", "تغرس"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "ما علاقة قول الشاعر: (شكوته سراً) بما قبله في البيت الأخير؟",
+      "options": ["نتيجة", "تعليل", "تأكيد", "توضيح"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "ما الواجب على الإنسان نحو صديقه كما يرى الشاعر في البيت الأخير؟",
+      "options": ["يرد الإساءة إليه", "يشكره في نفسه", "يصبر عليه دائماً", "يعاتبه في السر"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "ميز اللون البياني في قول الشاعر: (يرأها الدهر) في البيت الأول.",
+      "options": ["تشبيه مجمل", "مجاز مرسل", "استعارة مكنية", "تشبيه بليغ"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "لماذا أصبحت اللغة رقيقة سهلة في العصر العباسي؟",
+      "options": ["لشيوع ترف الحياة", "للتزاوج بين الفكر و المعاني", "لتطوير الموضوعات القديمة", "لمسايرة الحياة الأدبية المعقدة"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "ميز - مما يلي - نوع أسلوب الاستثناء في الجملة السابقة: (لا يكتم السر من الناس إلا كل ذي شرف).",
+      "options": ["تام مثبت", "تام منفي", "ناقص منفي", "ناقص مثبت"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "قال الشاعر: لا تختشوا من أزرم كان دا رزق فليس يأكل إلا الميتة الضبع. ميز - مما يلي - إعراب كلمة (الميتة) في البيت السابق.",
+      "options": ["مفعول به منصوب وعلامة نصبه الفتحة", "مستثنى منصوب وعلامة نصبه الفتحة", "فاعل مرفوع وعلامة رفعه الضمة", "خبر ليس منصوب وعلامة نصبه الفتحة"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "أزئ مصانع الإنتاج الحربي خلال ......... الدبابات والمدرعات. ميز - مما يلي - المستثنى الصحيح لملء الفراغ في الجملة السابقة.",
+      "options": ["مصنعان", "مصنعين", "مصنعا", "مصنعي"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "تسابقت الفرق الرياضية في بطولة ألعاب القوى غير فرقة. بين - مما يلي - حكم إعراب كلمة (غير) في الجملة السابقة.",
+      "options": ["يجب جرها بالإضافة", "يجب نصبها على الاستثناء", "يجوز نصبها على الاستثناء أو إعرابها بدلاً", "تعرب حسب موقعها في الجملة"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "أشار التربويون إلى أن الطالب الذي يفهم يحقق التفوق. ضع من معنى الجملة السابقة أسلوب استثناء.",
+      "options": ["يرى التربويون أن الفهم سبيل التفوق لا الحفظ", "ما من سبيل إلى الفهم كما أشار التربويون إلا التفوق", "لا سبيل إلى التفوق كما أشار التربويون إلا بالفهم", "لا يحقق التربويون التفوق إلا بالفهم"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "كان التبادل الثقافي والفني بين بلاد العراق ومصر القديمة واضحا من خلال .........",
+      "options": ["اكتشاف الحروف الهجائية", "إتقان صناعة الحلي", "الختم الملكي لحور محب", "التحلي بالأقراط المستديرة"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "The main idea of the passage is ..........",
+      "options": ["types of barter", "types of money", "trading of food all over the world", "qualities of money in different places"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "In some isolated parts of the world, money is .............",
+      "options": ["wanted as coins or paper notes", "needed for buying thing", "not needed for trading", "needed for buying thing"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "In some primitive places in the world today, we can.......",
+      "options": ["use local money only", "use any other money", "exchange goods", "buy nothing"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "If you want to use money today, it is good to be .......",
+      "options": ["portable", "modernized", "metal", "vessels"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "If you are a barter, you can.......",
+      "options": ["export and import goods", "buy and sell persons", "deal with commerce", "exchange different goods"],
+      "correct": 3
+    },
+    {
+      "category": "منهج",
+      "question": "Many people have some forms of.......in spring season.",
+      "options": ["allergy", "dust", "bacteria", "soil"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "We should evacuate the cupboards completely before spraying the insecticide. The synonyms of the underlined word 'evacuate' is.......",
+      "options": ["upload", "close", "empty", "fire"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "She enjoys playing........on her bad friends.",
+      "options": ["games", "advantages", "offers", "tricks"],
+      "correct": 3
+    },
+    {
+      "category": "منهج",
+      "question": "She has become a / an .......figure in the world of art.",
+      "options": ["familiar", "beautiful", "ancient", "critical"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "Something that serves to hold an object firmly is the.......",
+      "options": ["paddle", "thread", "steer", "anchor"],
+      "correct": 3
+    },
+    {
+      "category": "منهج",
+      "question": "You ....... clean the dust to avoid skin problems.",
+      "options": ["can", "must", "can't", "mustn't"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "If I ..........., you, I would tell her the truth.",
+      "options": ["was", "are", "were", "am"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "'You ....... park here. It is prohibited' said the officer.",
+      "options": ["mustn't", "needn't", "need to", "have to"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "If people eat too much, they.....fat.",
+      "options": ["got", "get", "will get", "would get"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "If I ..........that it was your birthday, I would make you a cake.",
+      "options": ["know", "knew", "known", "knowing"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "أي العبارات التالية تعبر عن العلاقة البيانية الصحيحة بين متوسط سرعة الجزيئات ودرجة الحرارة؟",
+      "options": ["شكل (أ)", "شكل (ب)", "شكل (ج)", "شكل (د)"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "تفاعل 1g من الهيدروجين (H=1) كما في التفاعل الآتي: H2(g) + Cl2(g) -> 2HCl(g) + 185 KJ. فيكون مخطط الطاقة المعبر عن هذا التفاعل هو:",
+      "options": ["شكل (أ)", "شكل (ب)", "شكل (ج)", "شكل (د)"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "ارتفعت درجة حرارة 0.5 mol من الماء النقي بمقدار 2°C فإن كمية الحرارة بالسعر تكون: (H=1, O=16)",
+      "options": ["9", "18", "36", "12"],
+      "correct": 1
+    },
+    {
+      "category": "منهج",
+      "question": "نظام يحتوي على مادتين A,B وكان التغير في الطاقة لكل منهما كما في الجدول: A=-60, B=+40. فإن التغير في طاقة الوسط المحيط تكون:",
+      "options": ["+20 KJ", "-20 KJ", "-100 KJ", "+100 KJ"],
+      "correct": 0
+    },
+    {
+      "category": "منهج",
+      "question": "الحرارة النوعية لبعض العناصر كما في الجدول: Al=0.9, Cu=0.38, Fe=0.44, C=0.71. عند تعرض كلت متساوية من جميع هذه العناصر لنفس كمية الحرارة فإن العنصر الذي ترتفع درجة حرارته اسرع هو:",
+      "options": ["Al", "Fe", "Cu", "C"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "نظام يحتوي على مادة A كتلتها 5g أذيبت في ماء كتلته 30g وفي نهاية التجربة انخفضت درجة الحرارة بمقدار 3°C وكانت كتلة المحلول 35g فإن النظام يكون:",
+      "options": ["تتغير كل من الكتلة والطاقة", "مغلق", "مفتوح", "لا تتغير كل من الكتلة والطاقة"],
+      "correct": 2
+    },
+    {
+      "category": "منهج",
+      "question": "ارتفعت درجة حرارة 34g من البلاتين بمقدار 5°C فإذا علمت أن الحرارة النوعية للبلاتين 0.133 J/g.°C فإن كمية الحرارة المكتسبة تكون:",
+      "options": ["22.6 J", "11.3 J", "27.5 J", "19.8 J"],
+      "correct": 0
+    }
+  ]
+}
