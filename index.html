@@ -25,7 +25,6 @@
       --danger: #ff4757;
     }
 
-    /* الوضع النهاري */
     body.light-mode {
       --bg: #f4f7f6;
       --card: rgba(255, 255, 255, 0.95);
@@ -74,7 +73,7 @@
     .solution-block{padding:14px;margin-top:10px;border:1px solid var(--line);border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:var(--text)}
     .solution-block button{float:left}
     .level-pills{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
-    .pill{padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(128,128,128,0.1);color:var(--text);display:flex;align-items:center;gap:5px;}
+    .pill{padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(128,128,128,0.1);color:var(--text);display:flex;align-items:center;gap:5px;cursor:pointer;}
     .pill.active{background:var(--cyan);color:#071018}
     .pill.done::after { content: '✔️'; font-size: 12px; }
     .notice{padding:15px;border:1px solid #ffbf4760;background:#ffbf4710;border-radius:14px;color:var(--gold);line-height:1.7}
@@ -91,6 +90,10 @@
     .quiz-option:hover { background: rgba(128,128,128,0.2); }
     .quiz-option.correct { background: rgba(37, 211, 102, 0.2); border-color: var(--success); }
     .quiz-option.wrong { background: rgba(255, 71, 87, 0.2); border-color: var(--danger); }
+    
+    .category-pills { display: flex; gap: 10px; margin-bottom: 20px; }
+    .cat-pill { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--line); cursor: pointer; font-weight: bold; }
+    .cat-pill.active { background: var(--purple); color: #fff; border-color: var(--purple); }
 
     @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:35px}.feature-grid{grid-template-columns:1fr}.workspace{padding:17px}.nav{padding:12px 0}.frame-wrap{min-height:440px}.hero-copy{padding:24px}}
   </style>
@@ -107,19 +110,16 @@
       <button data-view="history">لعبة التاريخ</button>
       <button data-view="portfolio">واجهة النيون</button>
     </nav>
-    <!-- زرار الوضع الليلي/النهاري -->
     <button id="theme-toggle" class="btn-icon" title="تغيير المظهر">
       <svg id="theme-icon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
     </button>
   </div></header>
   
   <main class="shell">
-    <!-- الرئيسية -->
     <section id="view-home"><div class="hero"><div class="panel hero-copy"><span class="eyebrow">بوابتك التعليمية في مكان واحد</span><h1>تعلّم، جرّب، <span class="gradient">وأنجز بطريقتك</span></h1><p>Student statement هي منصة عربية تجمع قاعدة حلول Qureo، والمكتبة الرقمية، والاختبارات التفاعلية، ولعبة التاريخ، وواجهة النيون. اختر القسم وابدأ.</p><div class="hero-actions"><button class="btn primary" data-go="solutions">استكشف الحلول ←</button><button class="btn" data-go="library">تصفح المكتبة 📚</button><button class="btn" data-go="quiz">ابدأ الاختبار 📝</button></div></div><aside class="panel hero-card"><div class="big">⚡</div><h2>منصة واحدة، تجارب متعددة</h2><p class="muted">تصميم متجاوب بالعربية، مع حفظ تقدمك في الحلول، اختبارات تفاعلية، ومكتبة مراجعات جاهزة للتحميل.</p></aside></div>
       <div class="feature-grid"><article class="card feature"><div class="big">💻</div><h3>حلول Qureo</h3><p>ابحث عن حلول المستويات وانسخ الإجابة. تتبع تقدمك وحفظه.</p></article><article class="card feature"><div class="big">📝</div><h3>اختبارات تفاعلية</h3><p>اختبر معلوماتك مع أسئلة الاختيار من متعدد، واحصل على درجتك فوراً.</p></article><article class="card feature"><div class="big">📚</div><h3>المكتبة الرقمية</h3><p>حمّل واقرأ أفضل المذكرات والمراجعات لجميع المواد والصفوف.</p></article></div>
     </section>
 
-    <!-- الحلول -->
     <section id="view-solutions" class="panel workspace hidden"><div class="section-heading"><div><span class="eyebrow">قاعدة الحلول</span><h2>Qureo والثقافة المالية</h2></div><label class="btn">تحميل ملف JSON <input id="db-upload" type="file" accept="application/json,.json" hidden></label></div><p class="muted">ارفع ملف JSON لعرض المستويات. (تم حفظ تقدمك تلقائياً).</p><div class="toolbar"><select class="field" id="platform"><option value="qureo">Qureo</option><option value="finance">الثقافة المالية</option></select><input id="query" class="field search" type="search" placeholder="ابحث عن سؤال أو كلمة..." aria-label="البحث"><select class="field" id="level"><option value="all">كل المستويات</option></select></div><div id="pills" class="level-pills"></div><div id="solutions" class="solution-list"></div><div class="notice" id="db-notice">ارفع ملف JSON يحتوي على <code>qureo</code> و<code>finance</code>.</div></section>
 
     <!-- المكتبة -->
@@ -132,22 +132,27 @@
     <!-- الاختبارات التفاعلية -->
     <section id="view-quiz" class="panel workspace hidden">
       <div class="section-heading"><div><span class="eyebrow">اختبر معلوماتك</span><h2>الاختبارات التفاعلية</h2></div></div>
-      <p class="muted">أجب على الأسئلة التالية، وستظهر لك النتيجة فوراً.</p>
+      <p class="muted">اختر التصنيف وابدأ الاختبار. سيتم حفظ نتيجتك الأخيرة لكل تصنيف.</p>
+      
+      <div class="category-pills" id="quiz-categories">
+        <div class="cat-pill active" data-cat="all">الكل</div>
+        <div class="cat-pill" data-cat="منهج">المنهج</div>
+        <div class="cat-pill" data-cat="برمجة">البرمجة</div>
+        <div class="cat-pill" data-cat="عامة">عامة</div>
+      </div>
+
       <div id="quiz-container" style="margin-top: 20px;"></div>
+      
       <div id="quiz-result" class="hidden" style="margin-top: 20px; padding: 20px; border-radius: 12px; text-align: center; background: var(--card); border: 1px solid var(--cyan);">
         <h3 id="score-text" style="font-size: 24px; color: var(--cyan); margin: 0;"></h3>
         <button class="btn primary" onclick="renderQuiz()" style="margin-top: 15px;">إعادة الاختبار</button>
       </div>
     </section>
 
-    <!-- لعبة التاريخ -->
     <section id="view-history" class="panel workspace hidden"><div class="section-heading"><div><span class="eyebrow">التعلم باللعب</span><h2>سِجِلّ الزمن — تاريخ الصف الثاني الثانوي</h2></div><button class="btn" data-view="home">العودة للرئيسية</button></div><p class="frame-note">محاكي، محكمة الشخصيات، القتال العكسي، وبنك الأسئلة. يُحفظ تقدمك على هذا الجهاز.</p><div class="frame-wrap"><iframe title="لعبة التاريخ" src="index%20(2).html" loading="lazy"></iframe></div></section>
-
-    <!-- واجهة النيون -->
     <section id="view-portfolio" class="panel workspace hidden"><div class="section-heading"><div><span class="eyebrow">الإبداع والتصميم</span><h2>واجهة الموقع النيونية</h2></div><button class="btn" data-view="home">العودة للرئيسية</button></div><p class="frame-note">الواجهة الأصلية تعمل في إطار مستقل للحفاظ على تفاعلاتها ومؤثراتها.</p><div class="frame-wrap"><iframe title="واجهة نيون إبداعية" src="%D9%88%D8%A7%D8%AC%D9%87%D8%A9_%D9%85%D9%88%D9%82%D8%B9_%D9%86%D9%8A%D9%88%D9%86_%D9%85%D8%AA%D9%88%D9%87%D8%AC%D8%A9_%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9.html" loading="lazy"></iframe></div></section>
   </main>
   
-  <!-- الفوتر والتواصل -->
   <footer>
     <div class="shell" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
       <div style="font-size: 16px; color: var(--text);">
@@ -164,24 +169,22 @@
   
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   
-  <!-- السكربتات -->
   <script src="data.js"></script>
   <script>
+    // متغيرات عامة للاختبارات
+    let quizData = [];
+    let currentCategory = 'all';
+    let userAnswers = {};
+
     // 1. الوضع الليلي والنهاري
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    
-    // التحقق من الوضع المحفوظ
-    if(localStorage.getItem('theme') === 'light') {
-        body.classList.add('light-mode');
-    }
+    if(localStorage.getItem('theme') === 'light') { body.classList.add('light-mode'); }
 
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('light-mode');
         const isLight = body.classList.contains('light-mode');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        
-        // تغيير أيقونة الزرار
         const icon = document.getElementById('theme-icon');
         if(isLight) {
             icon.innerHTML = '<path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm10-9a1 1 0 0 1-1 1h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm-18 0a1 1 0 0 1-1 1H1a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm14.95-6.36a1 1 0 0 1 1.41 1.41l-1.41 1.42a1 1 0 0 1-1.42-1.42l1.42-1.41zM5.05 17.54a1 1 0 0 1 1.41 1.41l-1.41 1.42a1 1 0 0 1-1.42-1.42l1.42-1.41zm12.9 1.41a1 1 0 0 1-1.42 1.42l-1.41-1.42a1 1 0 0 1 1.41-1.41l1.42 1.41zM5.05 6.46A1 1 0 0 1 6.46 5.05l1.42 1.42A1 1 0 0 1 6.46 7.88L5.05 6.46z"/>';
@@ -190,14 +193,98 @@
         }
     });
 
-    // 2. دالة عرض المكتبة
+    // 2. تحميل بيانات الاختبارات
+    async function loadQuizzes() {
+      try {
+        const res = await fetch('quizzes.json');
+        const data = await res.json();
+        quizData = data.quizzes;
+        renderQuiz();
+      } catch (error) {
+        document.getElementById('quiz-container').innerHTML = '<div class="notice">تعذر تحميل ملف الأسئلة. تأكد من وجود quizzes.json.</div>';
+      }
+    }
+
+    // 3. عرض الاختبارات حسب التصنيف
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      const resultBox = document.getElementById('quiz-result');
+      container.innerHTML = '';
+      resultBox.classList.add('hidden');
+      userAnswers = {};
+
+      const filteredQuestions = quizData.filter(q => currentCategory === 'all' || q.category === currentCategory);
+      
+      const lastScore = localStorage.getItem(`quiz_score_${currentCategory}`);
+      if(lastScore) {
+         document.getElementById('score-text').innerHTML = `آخر نتيجة لك في هذا القسم: ${lastScore} <br> جرب تاني!`;
+         resultBox.classList.remove('hidden');
+      }
+
+      if(filteredQuestions.length === 0) {
+        container.innerHTML = '<div class="notice">لا توجد أسئلة في هذا التصنيف حالياً.</div>';
+        return;
+      }
+
+      filteredQuestions.forEach((q, index) => {
+        const questionHTML = `
+          <div class="solution-card" style="margin-bottom: 15px;">
+            <h3 style="margin-bottom: 15px; color: var(--cyan);">${q.question} <span style="font-size:12px; color:var(--muted); font-weight:normal;">(${q.category})</span></h3>
+            <div class="options">
+              ${q.options.map((opt, i) => `
+                <div class="quiz-option" onclick="selectAnswer(${index}, ${i}, this, ${q.correct})">${opt}</div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        container.innerHTML += questionHTML;
+      });
+      
+      container.innerHTML += `<button class="btn primary" onclick="submitQuiz(${filteredQuestions.length})" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 18px;">عرض النتيجة 🎯</button>`;
+    }
+
+    function selectAnswer(qIndex, optIndex, element, correctIndex) {
+      const parent = element.parentElement;
+      parent.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('correct', 'wrong'));
+      
+      userAnswers[qIndex] = optIndex;
+      
+      if(optIndex === correctIndex) {
+        element.classList.add('correct');
+      } else {
+        element.classList.add('wrong');
+      }
+    }
+
+    function submitQuiz(totalQuestions) {
+      let score = 0;
+      const filteredQuestions = quizData.filter(q => currentCategory === 'all' || q.category === currentCategory);
+      
+      filteredQuestions.forEach((q, i) => {
+        if(userAnswers[i] === q.correct) { score++; }
+      });
+      
+      const percentage = Math.round((score / totalQuestions) * 100);
+      const resultBox = document.getElementById('quiz-result');
+      const scoreText = document.getElementById('score-text');
+      
+      scoreText.innerHTML = `نتيجتك: ${score} من ${totalQuestions} (${percentage}%) <br><br> ${percentage >= 50 ? 'ممتاز! 🎉' : 'محتاج مراجعة 💪'}`;
+      resultBox.classList.remove('hidden');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+      
+      localStorage.setItem(`quiz_score_${currentCategory}`, `${score}/${totalQuestions} (${percentage}%)`);
+    }
+
+    // 4. دالة عرض المكتبة
     function renderLibrary() {
       const libraryData = [
         { title: "مذكرة اللغة الإنجليزية", desc: "إعداد: أ. السباعي عطية", file: "English.pdf", color: "#b74cff" },
         { title: "مذكرة العزة في التاريخ", desc: "مذكرة التاريخ للصف الأول الثانوي", file: "history.pdf", color: "#ffbf47" },
         { title: "مذكرة سى والثالث والرابع", desc: "مذكرة جاهزة للتحميل", file: "since.pdf", color: "#00e5ff" },
-        { title: "مذكرة الأوائل في الرياضيات", desc: "مذكرة الرياضيات", file: "مذكرة_الأوائل_في_الرياضيات_للصف_الاول_الثانوي_ترم_اول.pdf", color: "#00e5ff" },
-        { title: "مذكرة اللغة العربية", desc: "إعداد: أ. محمد صلاح", file: "مذكرة لغة عربية - 1 ثانوي - ترم 1 - موقع مذكرة.pdf", color: "#00e5ff" }
+        { title: "مذكرة الأوائل في الرياضيات", desc: "مذكرة الرياضيات - الصف الأول الثانوي", file: "مذكرة_الأوائل_في_الرياضيات_للصف_الاول_الثانوي_ترم_اول.pdf", color: "#00e5ff" },
+        { title: "مذكرة اللغة العربية", desc: "إعداد: أ. محمد صلاح", file: "مذكرة لغة عربية - 1 ثانوي - ترم 1 - موقع مذكرة.pdf", color: "#00e5ff" },
+        { title: "مذكرة الرياضيات - البكالوريا", desc: "الصف الثاني المسار الطبي - إعداد: أ. محمد أحمد الفار", file: "math.pdf", color: "#00e5ff" },
+        { title: "مذكرة النحو الشاملة", desc: "الصف الأول الثانوي - الترم الأول", file: "arabic2.pdf", color: "#00e5ff" }
       ];
       const grid = document.getElementById('library-grid');
       if (!grid) return;
@@ -213,84 +300,7 @@
       `).join('');
     }
 
-    // 3. دالة عرض الاختبارات
-    const quizData = [
-      {
-        question: "ما هو ناتج 5 + 7؟",
-        options: ["10", "11", "12", "13"],
-        correct: 2 // الإجابة الصحيحة هي 12 (مؤشر 2)
-      },
-      {
-        question: "أي مما يلي يعتبر من لغات البرمجة؟",
-        options: ["HTML", "Python", "Windows", "Google"],
-        correct: 1 // Python
-      },
-      {
-        question: "ما هي عاصمة مصر؟",
-        options: ["الإسكندرية", "الجيزة", "القاهرة", "أسوان"],
-        correct: 2 // القاهرة
-      }
-    ];
-    
-    let userAnswers = {};
-
-    function renderQuiz() {
-      const container = document.getElementById('quiz-container');
-      const resultBox = document.getElementById('quiz-result');
-      container.innerHTML = '';
-      resultBox.classList.add('hidden');
-      userAnswers = {};
-      
-      quizData.forEach((q, index) => {
-        const questionHTML = `
-          <div class="solution-card" style="margin-bottom: 15px;">
-            <h3 style="margin-bottom: 15px;">${index + 1}. ${q.question}</h3>
-            <div class="options">
-              ${q.options.map((opt, i) => `
-                <div class="quiz-option" onclick="selectAnswer(${index}, ${i}, this)">${opt}</div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-        container.innerHTML += questionHTML;
-      });
-      
-      // إضافة زرار إرسال
-      container.innerHTML += `<button class="btn primary" onclick="submitQuiz()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 18px;">عرض النتيجة 🎯</button>`;
-    }
-
-    function selectAnswer(qIndex, optIndex, element) {
-      // مسح التحديد القديم
-      const parent = element.parentElement;
-      parent.querySelectorAll('.quiz-option').forEach(el => el.classList.remove('correct', 'wrong'));
-      
-      // تسجيل الإجابة
-      userAnswers[qIndex] = optIndex;
-      
-      // تغيير اللون بناءً على الإجابة (اختياري)
-      if(optIndex === quizData[qIndex].correct) {
-        element.classList.add('correct');
-      } else {
-        element.classList.add('wrong');
-      }
-    }
-
-    function submitQuiz() {
-      let score = 0;
-      quizData.forEach((q, i) => {
-        if(userAnswers[i] === q.correct) {
-          score++;
-        }
-      });
-      
-      const resultBox = document.getElementById('quiz-result');
-      const scoreText = document.getElementById('score-text');
-      scoreText.innerHTML = `نتيجتك: ${score} من ${quizData.length} <br> ${score === quizData.length ? 'ممتاز! 🎉' : 'حاول مرة أخرى 💪'}`;
-      resultBox.classList.remove('hidden');
-      resultBox.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // 4. دالة عرض الحلول مع حفظ التقدم
+    // 5. دالة عرض الحلول
     function renderSolutions(){
       const data=(window.SOLUTIONS_DB||{})[$('#platform').value]||[];
       const query=$('#query').value.trim().toLowerCase(),level=$('#level').value;
@@ -299,7 +309,6 @@
       sel.innerHTML='<option value="all">كل المستويات</option>'+data.map(x=>`<option value="${esc(x.level)}">المستوى ${esc(x.level)} — ${esc(x.title)}</option>`).join('');
       if([...sel.options].some(o=>o.value===old))sel.value=old;
       
-      // جلب المستويات المحفوظة
       const savedLevels = JSON.parse(localStorage.getItem('completed_levels') || '[]');
       
       $('#pills').innerHTML=data.map(x=>{
@@ -314,77 +323,4 @@
         return `<article class="solution-card">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <h3>المستوى ${esc(x.level)}: ${esc(x.title)}</h3>
-            <button class="btn" onclick="markDone(${x.level}, this)" style="background:${isDone ? 'var(--success)' : 'transparent'}; color:${isDone ? '#fff' : 'var(--text)'}; border-color:${isDone ? 'var(--success)' : 'var(--line)'};">
-              ${isDone ? 'تم الحل ✔️' : 'تحديد كـ تم الحل'}
-            </button>
-          </div>
-          ${(x.blocks||[{heading:x.title,text:x.content}]).map(b=>`<div class="solution-block"><strong>${esc(b.heading||'الحل')}</strong><button class="btn" data-copy="${encodeURIComponent(b.text||'')}">نسخ</button><div>${esc(b.text||'')}</div></div>`).join('')}
-        </article>`;
-      }).join(''):'<div class="notice">لا توجد نتائج.</div>';
-      
-      $('#db-notice').classList.toggle('hidden',data.length>0);
-    }
-
-    function markDone(level, btn) {
-      let saved = JSON.parse(localStorage.getItem('completed_levels') || '[]');
-      const lvlStr = String(level);
-      if(saved.includes(lvlStr)) {
-        saved = saved.filter(l => l !== lvlStr); // إزالة علامة الحل
-        btn.style.background = 'transparent';
-        btn.style.color = 'var(--text)';
-        btn.style.borderColor = 'var(--line)';
-        btn.textContent = 'تحديد كـ تم الحل';
-      } else {
-        saved.push(lvlStr); // إضافة علامة الحل
-        btn.style.background = 'var(--success)';
-        btn.style.color = '#fff';
-        btn.style.borderColor = 'var(--success)';
-        btn.textContent = 'تم الحل ✔️';
-      }
-      localStorage.setItem('completed_levels', JSON.stringify(saved));
-      
-      // تحديث شكل الأزرار الصغيرة (Pills)
-      const currentPill = document.querySelector(`.pill[data-level="${lvlStr}"]`);
-      if(currentPill) currentPill.classList.toggle('done');
-    }
-
-    // --- الأكواد الأساسية للموقع ---
-    const views=['home','solutions','library','quiz','history','portfolio'];
-    const $=s=>document.querySelector(s);
-    const toast=$('#toast');
-    let timer;
-    
-    function notify(t){toast.textContent=t;toast.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove('show'),2200)}
-    
-    function showView(n){
-      views.forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==n));
-      document.querySelectorAll('.navlinks button').forEach(b=>b.classList.toggle('active',b.dataset.view===n));
-      window.scrollTo({top:0,behavior:'smooth'});
-      if(n==='solutions') renderSolutions();
-      if(n==='library') renderLibrary();
-      if(n==='quiz') renderQuiz();
-    }
-    
-    document.addEventListener('click',e=>{const b=e.target.closest('[data-view],[data-go]');if(b)showView(b.dataset.view||b.dataset.go)});
-    
-    function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-    
-    $('#platform').onchange=()=>{$('#level').value='all';renderSolutions()};
-    $('#query').oninput=renderSolutions;
-    $('#level').onchange=renderSolutions;
-    $('#pills').onclick=e=>{const b=e.target.closest('[data-level]');if(b){$('#level').value=b.dataset.level;renderSolutions()}};
-    $('#solutions').onclick=async e=>{const b=e.target.closest('[data-copy]');if(b)try{await navigator.clipboard.writeText(decodeURIComponent(b.dataset.copy));notify('تم النسخ')}catch{notify('تعذر النسخ')}};
-    
-    // تحميل ملف JSON
-    $('#db-upload').onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].text());window.SOLUTIONS_DB=d;localStorage.setItem('solutions-db',JSON.stringify(d));notify('تم تحميل البيانات');renderSolutions()}catch{notify('ملف JSON غير صالح')}e.target.value=''};
-    try{const d=localStorage.getItem('solutions-db');if(d&&!window.SOLUTIONS_DB)window.SOLUTIONS_DB=JSON.parse(d)}catch{}
-    
-    // خلفية النجوم
-    const c=$('#stars'),ctx=c.getContext('2d');let ps=[];
-    function resize(){c.width=innerWidth;c.height=innerHeight;ps=Array.from({length:Math.min(50,Math.floor(innerWidth*innerHeight/25000))},()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}))}
-    function anim(){ctx.clearRect(0,0,c.width,c.height);ps.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;ctx.fillStyle='#00e5ff';ctx.fillRect(p.x,p.y,2,2);for(let j=i+1;j<ps.length;j++){let q=ps[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<115){ctx.strokeStyle=`rgba(0,229,255,${.12*(1-d/115)})`;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}});requestAnimationFrame(anim)}
-    resize();addEventListener('resize',resize);anim();
-    if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-  </script>
-</body>
-</html>
+            <button class="btn" onclick="markDone(${x.level}, this)" style="background:${isDone ? 'var(--success)' : 'transparent'
