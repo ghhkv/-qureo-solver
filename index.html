@@ -74,20 +74,32 @@
         {
           title: "مذكرة اللغة الإنجليزية - الصف الأول الثانوي - الترم الأول",
           desc: "إعداد: أ. السباعي عطية | تشمل الكلمات، القواعد، والقراءة (144 صفحة).",
-          file: "الصف الاول الثانوي -ترم اول 2027-السباعي عطية.pdf",
+          file: "English.pdf", 
           color: "#b74cff"
-        },
-        {
-          title: "مذكرة سى والثالث والرابع - الصف الأول الثانوي - الترم الأول",
-          desc: "مذكرة جاهزة للتحميل - ترم أول 2026-2027.",
-          file: "سى والثالث والرابع للصف الاول الثانوي ترم اول 2026-2027 جاهزة للتحميل.pdf",
-          color: "#00e5ff"
         },
         {
           title: "مذكرة العزة في التاريخ - الصف الأول الثانوي - الترم الأول",
           desc: "مذكرة التاريخ للصف الأول الثانوي - الفصل الدراسي الأول.",
-          file: "مذكرة العزة في التاريخ أولى ثانوي الترم الأول.pdf",
+          file: "history.pdf",
           color: "#ffbf47"
+        },
+        {
+          title: "مذكرة سى والثالث والرابع - الصف الأول الثانوي - الترم الأول",
+          desc: "مذكرة جاهزة للتحميل - ترم أول 2026-2027.",
+          file: "since.pdf",
+          color: "#00e5ff"
+        },
+        {
+          title: "مذكرة الأوائل في الرياضيات - الصف الأول الثانوي - الترم الأول",
+          desc: "مذكرة الرياضيات للصف الأول الثانوي - الفصل الدراسي الأول.",
+          file: "مذكرة_الأوائل_في_الرياضيات_للصف_الاول_الثانوي_ترم_اول.pdf", 
+          color: "#00e5ff"
+        },
+        {
+          title: "مذكرة اللغة العربية - الصف الأول الثانوي - الترم الأول",
+          desc: "إعداد: أ. محمد صلاح | تشمل النحو، البلاغة، الأدب، النصوص، والقراءة.",
+          file: "مذكرة لغة عربية - 1 ثانوي - ترم 1 - موقع مذكرة.pdf",
+          color: "#00e5ff"
         }
       ];
 
@@ -99,6 +111,7 @@
           <h3 style="color: ${item.color}; margin: 0;">${item.title}</h3>
           <p style="color: var(--muted); margin: 0; font-size: 14px;">${item.desc}</p>
           <div style="display: flex; gap: 10px; margin-top: auto; padding-top: 10px;">
+            <!-- استخدام encodeURI لضمان فتح الروابط العربية -->
             <a href="${encodeURI(item.file)}" target="_blank" class="btn primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; flex: 1;">قراءة 📖</a>
             <a href="${encodeURI(item.file)}" download class="btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; flex: 1; background-color: ${item.color}; color: #000; font-weight: bold;">تحميل ⬇️</a>
           </div>
