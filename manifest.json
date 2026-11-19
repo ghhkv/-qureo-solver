@@ -1,11 +1,11 @@
 {
-  "name": "سِجِلّ الزمن — تاريخ ٢ ثانوي",
-  "short_name": "سجل الزمن",
-  "description": "لعبة تفاعلية لمنهج التاريخ للصف الثاني الثانوي الترم الأول",
+  "name": "منصة الحلول الذكية",
+  "short_name": "حلول نيون",
+  "description": "بوابة تجمع حلول Qureo والثقافة المالية ولعبة التاريخ وواجهة النيون.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b1120",
-  "theme_color": "#f59e0b",
+  "background_color": "#080b16",
+  "theme_color": "#080b16",
   "lang": "ar",
   "dir": "rtl"
 }

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="بوابة تعليمية تجمع حلول Qureo والثقافة المالية ولعبة التاريخ وواجهة النيون.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>منصة الحلول الذكية</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080b16;--card:rgba(17,23,42,.88);--line:rgba(255,255,255,.1);--cyan:#00e5ff;--purple:#b74cff;--gold:#ffbf47;--muted:#aab4ca}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 85% 0,#182451 0,transparent 38%),radial-gradient(ellipse at 0 70%,#291348 0,transparent 30%),var(--bg);color:#f7f8ff;font-family:'Tajawal',sans-serif}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1180px;margin:auto;padding:0 20px}.topbar{position:sticky;top:0;z-index:10;background:rgba(8,11,22,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{font-family:Cairo,sans-serif;font-weight:900;font-size:20px;text-decoration:none;color:#fff}.brand b{color:var(--cyan);text-shadow:0 0 15px #00e5ff88}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks button,.btn,.tab{border:1px solid var(--line);border-radius:12px;padding:10px 15px;color:#e8ecf7;background:#ffffff09;transition:.2s}.navlinks button:hover,.btn:hover,.tab:hover{border-color:#00e5ff88;transform:translateY(-1px)}.navlinks button.active,.btn.primary{background:linear-gradient(100deg,var(--cyan),#ab62ff);color:#090c17;border-color:transparent;font-weight:900}.hero{padding:62px 0 35px;display:grid;grid-template-columns:1.35fr .65fr;gap:25px;align-items:center}.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:24px;backdrop-filter:blur(12px)}.hero-copy{padding:34px}.eyebrow{color:var(--cyan);font-weight:800}.hero h1{font:900 clamp(32px,5vw,55px)/1.25 Cairo,sans-serif;margin:12px 0}.gradient{background:linear-gradient(90deg,var(--cyan),#d890ff,var(--gold));background-clip:text;color:transparent}.hero p,.muted{color:var(--muted);line-height:1.85}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.hero-card{padding:25px}.hero-card .big{font-size:52px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0 42px}.feature{padding:22px}.feature h3{margin:8px 0}.feature p{color:var(--muted);line-height:1.7;margin-bottom:0}.workspace{padding:28px;margin:25px 0 45px;min-height:400px}.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}.section-heading h2{font:800 27px Cairo,sans-serif;margin:0}.hidden{display:none!important}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.field{background:#080c18;border:1px solid var(--line);color:white;border-radius:12px;padding:12px 14px;min-width:190px}.field.search{flex:1}.solution-list{display:grid;gap:14px}.solution-card{padding:18px;border:1px solid var(--line);border-radius:18px;background:#080c18}.solution-card h3{margin:0 0 10px}.solution-block{padding:14px;margin-top:10px;border:1px solid var(--line);border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75;color:#dce4f7}.solution-block button{float:left}.level-pills{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.pill{padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#ffffff09;color:#ddd}.pill.active{background:var(--cyan);color:#071018}.notice{padding:15px;border:1px solid #ffbf4760;background:#ffbf4710;border-radius:14px;color:#ffe4a8;line-height:1.7}.frame-wrap{height:min(78vh,900px);min-height:520px;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#0b1120}.frame-wrap iframe{width:100%;height:100%;border:0;background:#0b1120}.frame-note{font-size:13px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);text-align:center}.toast{position:fixed;bottom:20px;left:20px;background:#152039;border:1px solid #00e5ff66;padding:13px 18px;border-radius:14px;opacity:0;transform:translateY(15px);transition:.25s;z-index:20}.toast.show{opacity:1;transform:none}.canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5}@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:35px}.feature-grid{grid-template-columns:1fr}.workspace{padding:17px}.nav{padding:12px 0}.frame-wrap{min-height:440px}.hero-copy{padding:24px}}
+  </style>
+</head>
+<body>
+  <canvas class="canvas" id="stars" aria-hidden="true"></canvas>
+  <header class="topbar"><div class="shell nav">
+    <a class="brand" href="#home">حلول<span><b>.نيون</b></span></a>
+    <nav class="navlinks" aria-label="الأقسام">
+      <button class="active" data-view="home">الرئيسية</button><button data-view="solutions">الحلول</button><button data-view="history">لعبة التاريخ</button><button data-view="portfolio">واجهة النيون</button>
+    </nav>
+  </div></header>
+  <main class="shell">
+    <section id="view-home">
+      <div class="hero">
+        <div class="panel hero-copy"><span class="eyebrow">بوابتك التعليمية في مكان واحد</span><h1>تعلّم، جرّب، <span class="gradient">وأنجز بطريقتك</span></h1><p>منصة عربية تجمع قاعدة حلول Qureo والثقافة المالية، لعبة التاريخ التفاعلية، وواجهة النيون الإبداعية. اختر القسم وابدأ.</p><div class="hero-actions"><button class="btn primary" data-go="solutions">استكشف الحلول ←</button><button class="btn" data-go="history">ابدأ لعبة التاريخ ⏳</button><button class="btn" data-go="portfolio">شاهد واجهة النيون ✨</button></div></div>
+        <aside class="panel hero-card"><div class="big">⚡</div><h2>منصة واحدة، تجارب متعددة</h2><p class="muted">تصميم متجاوب بالعربية، مع حفظ تقدم لعبة التاريخ محلياً، بحث ونسخ للحلول، وتجربة نيون تفاعلية.</p></aside>
+      </div>
+      <div class="feature-grid">
+        <article class="card feature"><div class="big">💻</div><h3>Qureo والثقافة المالية</h3><p>ابحث عن حلول المستويات، صفِّ النتائج، وانسخ الإجابة. يمكنك إضافة ملف البيانات عند توفره.</p></article>
+        <article class="card feature"><div class="big">🏛️</div><h3>سِجِلّ الزمن</h3><p>ثمانية دروس تاريخية وأربعة أنماط تحديات لكل درس، مع نقاط XP وتقدم محفوظ.</p></article>
+        <article class="card feature"><div class="big">🌌</div><h3>واجهة النيون</h3><p>معرض ومؤثرات بصرية، قائمة متجاوبة، نافذة معاينة، وخلفية جزيئات متحركة.</p></article>
+      </div>
+    </section>
+
+    <section id="view-solutions" class="panel workspace hidden">
+      <div class="section-heading"><div><span class="eyebrow">قاعدة الحلول</span><h2>Qureo والـثقافة المالية</h2></div><label class="btn">تحميل ملف JSON <input id="db-upload" type="file" accept="application/json,.json" hidden></label></div>
+      <p class="muted">اختر المنصة وابحث في محتوى المستويات. ملف <code>data.js</code> غير موجود ضمن الملفات الحالية، لذلك أضف قاعدة البيانات بصيغة JSON أو ارفع ملفاً محلياً لعرض حلولك.</p>
+      <div class="toolbar"><select class="field" id="platform"><option value="qureo">Qureo</option><option value="finance">الثقافة المالية</option></select><input id="query" class="field search" type="search" placeholder="ابحث عن سؤال أو كلمة..." aria-label="البحث"><select class="field" id="level"><option value="all">كل المستويات</option></select></div>
+      <div id="pills" class="level-pills"></div><div id="solutions" class="solution-list"></div>
+      <div class="notice" id="db-notice">لم يتم تحميل بيانات بعد. يُقبل JSON بهذا الشكل: كائن يحتوي على <code>qureo</code> و<code>finance</code>، وكل منهما مصفوفة مستويات تحتوي <code>level</code> و<code>title</code> و<code>content</code> أو <code>blocks</code>.</div>
+    </section>
+
+    <section id="view-history" class="panel workspace hidden">
+      <div class="section-heading"><div><span class="eyebrow">التعلم باللعب</span><h2>سِجِلّ الزمن — تاريخ الصف الثاني الثانوي</h2></div><button class="btn" data-view="home">العودة للرئيسية</button></div>
+      <p class="frame-note">اللعبة تتضمن المحاكي، محكمة الشخصيات، القتال العكسي، وبنك الأسئلة. يُحفظ تقدمك على هذا الجهاز.</p>
+      <div class="frame-wrap"><iframe title="لعبة التاريخ" src="index%20(2).html" loading="lazy"></iframe></div>
+    </section>
+
+    <section id="view-portfolio" class="panel workspace hidden">
+      <div class="section-heading"><div><span class="eyebrow">الإبداع والتصميم</span><h2>واجهة الموقع النيونية</h2></div><button class="btn" data-view="home">العودة للرئيسية</button></div>
+      <p class="frame-note">الواجهة الأصلية تعمل داخل إطار مستقل للحفاظ على تفاعلاتها ومؤثراتها دون تعارض مع بقية أقسام المنصة.</p>
+      <div class="frame-wrap"><iframe title="واجهة نيون إبداعية" src="%D9%88%D8%A7%D8%AC%D9%87%D8%A9_%D9%85%D9%88%D9%82%D8%B9_%D9%86%D9%8A%D9%88%D9%86_%D9%85%D8%AA%D9%88%D9%87%D8%AC%D8%A9_%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9.html" loading="lazy"></iframe></div>
+    </section>
+  </main>
+  <footer><div class="shell">منصة الحلول الذكية — جميع الأقسام في مكان واحد ⚡</div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script>
+    const views=['home','solutions','history','portfolio']; let current='home', selected='all';
+    const db=window.SOLUTIONS_DB||{}; const $=s=>document.querySelector(s); const toast=$('#toast'); let toastTimer;
+    function notify(text){toast.textContent=text;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)}
+    function showView(name){current=name;views.forEach(v=>$('#view-'+v).classList.toggle('hidden',v!==name));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='solutions')renderSolutions()}
+    document.addEventListener('click',e=>{const target=e.target.closest('[data-view],[data-go]');if(target)showView(target.dataset.view||target.dataset.go)});
+    function esc(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function getData(){return window.SOLUTIONS_DB||{}}
+    function renderSolutions(){const platform=$('#platform').value;const data=getData()[platform]||[];const query=$('#query').value.trim().toLocaleLowerCase();const level=$('#level').value;const levels=$('#level');const previous=levels.value;levels.innerHTML='<option value="all">كل المستويات</option>'+data.map(x=>`<option value="${esc(x.level)}">المستوى ${esc(x.level)} — ${esc(x.title)}</option>`).join('');if([...levels.options].some(o=>o.value===previous))levels.value=previous;
+      const pills=$('#pills');pills.innerHTML=data.map(x=>`<button class="pill ${String(x.level)===String(level)?'active':''}" data-level="${esc(x.level)}">${esc(x.level)}</button>`).join('');
+      const filtered=data.filter(x=>(level==='all'||String(x.level)===level)&&(!query||`${x.title||''} ${x.content||''} ${(x.blocks||[]).map(b=>`${b.heading||''} ${b.text||''}`).join(' ')}`.toLocaleLowerCase().includes(query)));
+      $('#solutions').innerHTML=filtered.length?filtered.map(x=>{const blocks=x.blocks||[{heading:x.title,text:x.content}];return `<article class="solution-card"><h3>المستوى ${esc(x.level)}: ${esc(x.title)}</h3>${blocks.map(b=>`<div class="solution-block"><strong>${esc(b.heading||'الحل')}</strong><button class="btn" data-copy="${encodeURIComponent(b.text||'')}">نسخ</button><div>${esc(b.text||'')}</div></div>`).join('')}</article>`}).join(''):'<div class="notice">لا توجد نتائج؛ تأكد من تحميل ملف بيانات مناسب.</div>';
+      $('#db-notice').classList.toggle('hidden',data.length>0);}
+    $('#platform').addEventListener('change',()=>{$('#level').value='all';selected='all';renderSolutions()});$('#query').addEventListener('input',renderSolutions);$('#level').addEventListener('change',renderSolutions);
+    $('#pills').addEventListener('click',e=>{const b=e.target.closest('[data-level]');if(!b)return;$('#level').value=b.dataset.level;renderSolutions()});
+    $('#solutions').addEventListener('click',async e=>{const b=e.target.closest('[data-copy]');if(!b)return;try{await navigator.clipboard.writeText(decodeURIComponent(b.dataset.copy));notify('تم نسخ النص إلى الحافظة')}catch{notify('تعذر النسخ؛ انسخ النص يدوياً')}});
+    $('#db-upload').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed||typeof parsed!=='object')throw new Error('bad');window.SOLUTIONS_DB=parsed;localStorage.setItem('solutions-db',JSON.stringify(parsed));notify('تم تحميل قاعدة البيانات');renderSolutions()}catch{notify('ملف JSON غير صالح')}e.target.value=''});
+    try{const saved=localStorage.getItem('solutions-db');if(saved&&!window.SOLUTIONS_DB)window.SOLUTIONS_DB=JSON.parse(saved)}catch{}
+    document.querySelectorAll('.navlinks button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+    const canvas=$('#stars'),ctx=canvas.getContext('2d');let particles=[];function resize(){canvas.width=innerWidth;canvas.height=innerHeight;particles=Array.from({length:Math.min(55,Math.floor(innerWidth*innerHeight/25000))},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25}))}function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.fillStyle='#00e5ff';ctx.fillRect(p.x,p.y,2,2);for(let j=i+1;j<particles.length;j++){let q=particles[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<115){ctx.strokeStyle=`rgba(0,229,255,${.12*(1-d/115)})`;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}});requestAnimationFrame(animate)}resize();addEventListener('resize',resize);animate();
+    if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  </script>
+</body>
+</html>
